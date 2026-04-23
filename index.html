@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comic Crush Studio — Custom Comics From Your Photos</title>
+<link rel="stylesheet" href="style.css">
+<style>
+/* HERO A */
+.hero-a { background:var(--cream); min-height:88vh; display:flex; align-items:center; overflow:hidden; position:relative; padding:4rem 2rem; }
+.hero-a-grid { display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:center; width:100%; }
+.panels-wrap { position:relative; height:540px; }
+.panel-main { position:absolute; width:60%; left:6%; top:2%; transform:rotate(-3deg); z-index:2; box-shadow:8px 8px 0 var(--ink) !important; }
+.panel-main img { width:100%; height:100%; object-fit:cover; object-position:top; aspect-ratio:3/4; }
+.panel-sec { position:absolute; width:50%; right:0; bottom:4%; transform:rotate(4.5deg); z-index:3; box-shadow:6px 6px 0 var(--ink) !important; }
+.panel-sec img { width:100%; height:100%; object-fit:cover; object-position:bottom; aspect-ratio:3/4; }
+.hero-speech-a { top:-12px; right:5%; transform:rotate(3deg); font-size:0.95rem; }
+.hero-starburst { position:absolute; top:18%; right:-2%; width:82px; height:82px; font-size:0.62rem; transform:rotate(18deg); z-index:6; padding:5px; line-height:1.25; }
+.stat-row { display:flex; gap:2rem; margin-top:1.75rem; flex-wrap:wrap; }
+.stat-num { font-family:var(--font-display); font-size:1.9rem; display:block; line-height:1; }
+.stat-label { font-size:0.7rem; text-transform:uppercase; letter-spacing:0.09em; color:#999; font-weight:600; }
+
+/* FEATURE GRID */
+.featured-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; }
+.panel-ph { width:100%; aspect-ratio:3/4; display:flex; flex-direction:column; align-items:center; justify-content:center; position:relative; overflow:hidden; }
+.panel-ph::before { content:''; position:absolute; inset:0; background-image:radial-gradient(circle,rgba(0,0,0,0.09) 1px,transparent 1px); background-size:14px 14px; }
+
+/* WHY GRID */
+.why-grid { display:grid; grid-template-columns:repeat(4,1fr); border:3px solid var(--ink); box-shadow:var(--shadow-heavy); background:var(--cream); }
+.why-cell { padding:2rem 1.4rem; border-right:3px solid var(--ink); }
+.why-cell:last-child { border-right:none; }
+.why-icon { font-size:2.2rem; line-height:1; margin-bottom:0.65rem; }
+.why-title { font-family:var(--font-display); font-size:1.4rem; margin-bottom:0.35rem; }
+.why-desc { font-size:0.85rem; color:#666; line-height:1.6; }
+
+/* PRICING */
+.pricing-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:1.25rem; margin-top:2.5rem; align-items:start; }
+
+/* TESTIMONIAL */
+.testi-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.25rem; }
+
+/* CTA BAND */
+.cta-band { background:var(--red); border-top:4px solid var(--ink); border-bottom:4px solid var(--ink); padding:5rem 2rem; position:relative; overflow:hidden; }
+.cta-band::before { content:''; position:absolute; inset:0; background-image:radial-gradient(circle,rgba(0,0,0,0.1) 1.5px,transparent 1.5px); background-size:22px 22px; pointer-events:none; }
+
+/* FAQ LAYOUT */
+.faq-layout { display:grid; grid-template-columns:1fr 2fr; gap:4rem; align-items:start; }
+
+@media(max-width:900px) {
+  .featured-grid { grid-template-columns:1fr 1fr; }
+  .why-grid { grid-template-columns:1fr 1fr; }
+  .why-cell { border-bottom:3px solid var(--ink); }
+  .why-cell:nth-child(2n) { border-right:none; }
+  .why-cell:nth-child(3),.why-cell:nth-child(4) { border-bottom:none; }
+  .pricing-grid { grid-template-columns:1fr 1fr; }
+  .testi-grid { grid-template-columns:1fr; }
+  .faq-layout { grid-template-columns:1fr; gap:1.5rem; }
+}
+@media(max-width:768px) {
+  .hero-a-grid,.hero-b-grid { grid-template-columns:1fr; }
+  .panels-wrap { height:280px; margin-top:2rem; }
+  .panel-main { width:52%; }
+  .panel-sec { width:44%; }
+  /* hero-b removed */
+}
+@media(max-width:560px) {
+  .featured-grid { grid-template-columns:1fr; }
+  .pricing-grid { grid-template-columns:1fr; }
+  .why-grid { grid-template-columns:1fr; }
+  .why-cell { border-right:none; border-bottom:3px solid var(--ink); }
+  .why-cell:last-child { border-bottom:none; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html">
+      <div class="logo-wordmark">
+        <span class="logo-comic">COMIC</span><span class="logo-heart">♥</span><span class="logo-crush">CRUSH</span><span class="logo-studio">STUDIO</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="browse.html">Browse Comics</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="create.html" class="nav-cta">Create Yours ✦</a></li>
+    </ul>
+    <button class="nav-menu-btn" onclick="toggleMobile()" aria-label="Menu">
+      <svg width="22" height="16" viewBox="0 0 22 16"><rect y="0" width="22" height="2.5" fill="#faf6ed"/><rect y="6.5" width="22" height="2.5" fill="#faf6ed"/><rect y="13" width="22" height="2.5" fill="#faf6ed"/></svg>
+    </button>
+  </div>
+  <div class="nav-mobile-menu" id="mobileMenu" style="display:none">
+    <a href="browse.html">Browse Comics</a>
+    <a href="about.html">About</a>
+    <a href="#pricing">Pricing</a>
+    <a href="create.html" style="color:var(--yellow)!important;font-weight:700">✦ Create Yours</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero-a halftone">
+  <div class="container">
+    <div class="hero-a-grid">
+      <div>
+        <div class="section-label">✦ Custom Comics From Real Photos</div>
+        <h1 class="display-heading">YOUR LIFE.<br>ONE EPIC<br><span class="text-red">COMIC.</span></h1>
+        <p class="subheading mt-sm">Upload your photo. Tell us your story. Get a stunning custom comic starring you, your partner, your pet — anyone you love.</p>
+        <div class="d-flex flex-wrap gap-sm mt-md">
+          <a href="create.html" class="btn btn-primary btn-lg">Create Your Comic ✦</a>
+          <a href="browse.html" class="btn btn-secondary btn-lg">Browse Comics</a>
+        </div>
+        <div class="stat-row">
+          <div><span class="stat-num">200+</span><span class="stat-label">Comics Made</span></div>
+          <div><span class="stat-num">⭐ 4.9</span><span class="stat-label">Avg Rating</span></div>
+          <div><span class="stat-num">48hr</span><span class="stat-label">Turnaround</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="panels-wrap">
+          <div class="comic-panel panel-main">
+            <img src="AI%20Comics/beach/Page%201.png" alt="Custom comic example">
+            <div class="panel-number">1</div>
+          </div>
+          <div class="comic-panel panel-sec">
+            <img src="AI%20Comics/beach/Page%204.png" alt="Custom comic panel">
+            <div class="panel-number">4</div>
+          </div>
+          <div class="speech-bubble hero-speech-a">This is us! 💥</div>
+          <div class="starburst hero-starburst">JUST<br>FOR<br>YOU!</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section-sm" style="background:var(--yellow);border-top:4px solid var(--ink);border-bottom:4px solid var(--ink)">
+  <div class="container">
+    <div class="text-center mb-md">
+      <div class="section-label red" style="margin:0 auto 0.75rem">How It Works</div>
+      <h2 class="section-heading">Three steps to your comic.</h2>
+    </div>
+    <div class="steps-strip" style="background:white">
+      <div class="step-cell">
+        <div class="step-num">01</div>
+        <div class="step-title">Upload Your Photo</div>
+        <p class="step-desc">Send us a clear photo of whoever should star in the comic. The better the shot, the more accurate the character.</p>
+      </div>
+      <div class="step-cell">
+        <div class="step-num">02</div>
+        <div class="step-title">Tell Your Story</div>
+        <p class="step-desc">Give us a short scenario — funny, romantic, adventurous, totally chaotic. We work with whatever you've got.</p>
+      </div>
+      <div class="step-cell">
+        <div class="step-num">03</div>
+        <div class="step-title">Receive Your Comic</div>
+        <p class="step-desc">Your custom comic arrives within 48 hours as a high-res file — ready to print, share, gift, or frame.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED COMICS -->
+<section class="section">
+  <div class="container">
+    <div class="d-flex align-center flex-wrap mb-md" style="justify-content:space-between;gap:1rem">
+      <div>
+        <div class="section-label">✦ Fan Favorites</div>
+        <h2 class="section-heading">Comics people<br>are obsessed with.</h2>
+      </div>
+      <a href="browse.html" class="btn btn-outline btn-lg hide-mobile">Browse All →</a>
+    </div>
+    <div class="featured-grid">
+      <a href="detail.html?comic=beach" class="comic-card">
+        <div class="comic-card-thumb"><img src="AI%20Comics/beach/Page%201.png" alt="The Chaotic Beach Date"><div class="panel-number">🏖</div></div>
+        <div class="comic-card-body">
+          <div class="comic-card-title">The Chaotic Beach Date</div>
+          <p class="comic-card-desc">Ariana &amp; Quinten attempt the perfect sunset photo. Chaos immediately ensues.</p>
+          <div class="comic-tags"><span class="tag red">Couples</span><span class="tag yellow">Funny</span><span class="tag blue">Beach</span></div>
+        </div>
+      </a>
+      <a href="detail.html?comic=carrepair" class="comic-card">
+        <div class="comic-card-thumb"><img src="AI%20Comics/carrepair/Page%201.png" alt="Q Car Repair"><div class="panel-number">🔧</div></div>
+        <div class="comic-card-body">
+          <div class="comic-card-title">The Car Repair Saga</div>
+          <p class="comic-card-desc">A quick fix that turns into an all-day adventure with unexpected twists.</p>
+          <div class="comic-tags"><span class="tag yellow">Funny</span><span class="tag">Adventure</span></div>
+        </div>
+      </a>
+      <a href="detail.html?comic=spacecar" class="comic-card">
+        <div class="comic-card-thumb"><img src="AI%20Comics/spacecar/Page%201.png" alt="Space Car"><div class="panel-number">🚀</div></div>
+        <div class="comic-card-body">
+          <div class="comic-card-title">The Space Car</div>
+          <p class="comic-card-desc">An ordinary car trip becomes an intergalactic joyride.</p>
+          <div class="comic-tags"><span class="tag blue">Adventure</span><span class="tag yellow">Funny</span></div>
+        </div>
+      </a>
+      <a href="detail.html?comic=bunny" class="comic-card">
+        <div class="comic-card-thumb"><img src="AI%20Comics/bunny/Page%201.png" alt="A Bunny"><div class="panel-number">🐰</div></div>
+        <div class="comic-card-body">
+          <div class="comic-card-title">Bunny's Big Day</div>
+          <p class="comic-card-desc">One small bunny. One very large personality. A wholesome five-page adventure.</p>
+          <div class="comic-tags"><span class="tag blue">Pets</span><span class="tag">Wholesome</span><span class="tag yellow">Cute</span></div>
+        </div>
+      </a>
+      <a href="browse.html" class="comic-card">
+        <div class="comic-card-thumb"><div class="panel-ph" style="background:#e8f5e9"><div style="position:relative;z-index:1;text-align:center"><div style="font-family:var(--font-display);font-size:3rem">🚗</div><div class="caption-box" style="background:#4caf50;color:white;border-color:#4caf50">Road Trip!</div></div></div></div>
+        <div class="comic-card-body">
+          <div class="comic-card-title">The Family Road Trip</div>
+          <p class="comic-card-desc">Three kids. Two parents. One car. Six hours of hilarious chaos — forever immortalised.</p>
+          <div class="comic-tags"><span class="tag">Family</span><span class="tag yellow">Funny</span><span class="tag">Adventure</span></div>
+        </div>
+      </a>
+      <a href="browse.html" class="comic-card">
+        <div class="comic-card-thumb"><div class="panel-ph" style="background:#f0e8ff"><div style="position:relative;z-index:1;text-align:center"><div style="font-family:var(--font-display);font-size:3rem">💻</div><div class="caption-box" style="background:#7c3aed;color:white;border-color:#7c3aed">WFH Chaos</div></div></div></div>
+        <div class="comic-card-body">
+          <div class="comic-card-title">Work From Home Blues</div>
+          <p class="comic-card-desc">The cat on the keyboard. The kid in the meeting. The unmuted mic. Sound familiar?</p>
+          <div class="comic-tags"><span class="tag yellow">Funny</span><span class="tag">Relatable</span></div>
+        </div>
+      </a>
+    </div>
+    <div class="text-center mt-lg hide-desktop"><a href="browse.html" class="btn btn-dark btn-lg">Browse All Comics →</a></div>
+  </div>
+</section>
+
+<!-- WHY COMIC CRUSH -->
+<section class="section motion-lines-bg" style="background:var(--ink);border-top:4px solid var(--ink)">
+  <div class="container">
+    <div class="text-center mb-lg">
+      <div class="section-label">✦ Why It's Special</div>
+      <h2 class="section-heading text-cream">Not just a comic.<br>A <span class="text-yellow">keepsake.</span></h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-cell">
+        <div class="why-icon">👤</div>
+        <div class="why-title">Real Characters</div>
+        <p class="why-desc">Your character is generated from your actual photo — same face, same style, same vibe. Our team refines every panel until it looks unmistakably like you.</p>
+      </div>
+      <div class="why-cell">
+        <div class="why-icon">🎭</div>
+        <div class="why-title">Any Story</div>
+        <p class="why-desc">Funny, romantic, action-packed, absurd — we craft the prompts and shape the panels to tell exactly the story you have in your head.</p>
+      </div>
+      <div class="why-cell">
+        <div class="why-icon">🎁</div>
+        <div class="why-title">Perfect Gift</div>
+        <p class="why-desc">Birthdays, anniversaries, just because — a custom comic hits different every single time.</p>
+      </div>
+      <div class="why-cell">
+        <div class="why-icon">⚡</div>
+        <div class="why-title">48hr Delivery</div>
+        <p class="why-desc">High-res digital files delivered in 48 hours. Print it, frame it, post it — it's yours forever.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section" id="pricing" style="background:var(--cream-dark);border-top:4px solid var(--ink)">
+  <div class="container">
+    <div class="text-center mb-md">
+      <div class="section-label red">✦ Pricing</div>
+      <h2 class="section-heading">Pick your story size.</h2>
+      <p class="subheading mt-sm" style="margin:0 auto">Every comic is made to order. All prices include revisions and high-res delivery.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <div class="pricing-name">Single Page</div>
+        <div class="pricing-pages">1 page · 4–6 panels</div>
+        <div class="pricing-price">$29</div>
+        <p class="pricing-desc">A quick, hilarious moment in one killer page.</p>
+        <ul class="pricing-features"><li>1 character</li><li>1 illustrated page</li><li>Speech bubbles + captions</li><li>High-res PDF</li></ul>
+        <a href="create.html" class="btn btn-outline" style="width:100%;justify-content:center">Start</a>
+      </div>
+      <div class="pricing-card">
+        <div class="pricing-name">Comic Strip</div>
+        <div class="pricing-pages">3 panels · horizontal</div>
+        <div class="pricing-price">$39</div>
+        <p class="pricing-desc">The classic strip format. Perfect for a funny moment.</p>
+        <ul class="pricing-features"><li>Up to 2 characters</li><li>3-panel strip</li><li>Custom bubbles</li><li>PNG + PDF</li></ul>
+        <a href="create.html" class="btn btn-outline" style="width:100%;justify-content:center">Start</a>
+      </div>
+      <div class="pricing-card featured" style="margin-top:-1rem">
+        <div class="pricing-badge">Most Popular</div>
+        <div class="pricing-name">3-Page Comic</div>
+        <div class="pricing-pages">3 pages · full story</div>
+        <div class="pricing-price">$79</div>
+        <p class="pricing-desc">A full mini story arc with real drama and character.</p>
+        <ul class="pricing-features"><li>Up to 3 characters</li><li>3 story pages</li><li>Cover page included</li><li>Unlimited revisions</li><li>Print-ready files</li></ul>
+        <a href="create.html" class="btn btn-secondary" style="width:100%;justify-content:center">Start</a>
+      </div>
+      <div class="pricing-card">
+        <div class="pricing-name">6-Page Comic</div>
+        <div class="pricing-pages">6 pages · full story</div>
+        <div class="pricing-price">$149</div>
+        <p class="pricing-desc">A proper short comic book with room to breathe.</p>
+        <ul class="pricing-features"><li>Up to 4 characters</li><li>Cover + 6 pages</li><li>Full narrative arc</li><li>Back cover design</li><li>Print-ready files</li></ul>
+        <a href="create.html" class="btn btn-outline" style="width:100%;justify-content:center">Start</a>
+      </div>
+      <div class="pricing-card">
+        <div class="pricing-name">Full Custom</div>
+        <div class="pricing-pages">8+ pages · anything</div>
+        <div class="pricing-price">$249+</div>
+        <p class="pricing-desc">Your magnum opus. Custom everything. Let's build something legendary.</p>
+        <ul class="pricing-features"><li>Unlimited characters</li><li>Custom page count</li><li>Creative brief call</li><li>Exclusive style options</li><li>Priority turnaround</li></ul>
+        <a href="create.html" class="btn btn-dark" style="width:100%;justify-content:center">Let's Talk</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section" style="border-top:4px solid var(--ink)">
+  <div class="container">
+    <div class="text-center mb-lg">
+      <div class="section-label blue">✦ Real People. Real Reactions.</div>
+      <h2 class="section-heading">They cried. They laughed.<br>They ordered again.</h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testimonial-card">
+        <div class="testimonial-q">"</div>
+        <p class="testimonial-text">I got a 3-page comic of my partner and our dog for his birthday. He literally screamed. The artist nailed both their faces — it was terrifyingly accurate and hilarious.</p>
+        <div class="testimonial-author">Priya K.</div>
+        <div class="testimonial-role">Birthday gift · 3-Page Comic</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-q">"</div>
+        <p class="testimonial-text">Ordered a comic of my girlfriend and me on our first date (the chaotic version). It came back better than anything I could have imagined. Gave it to her framed. She cried.</p>
+        <div class="testimonial-author">Marcus T.</div>
+        <div class="testimonial-role">Couples comic · Anniversary</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-q">"</div>
+        <p class="testimonial-text">Got a single-page comic of my cat being dramatic. My whole family was in tears laughing. Worth every cent. Already planning the sequel starring the dog.</p>
+        <div class="testimonial-author">Jess W.</div>
+        <div class="testimonial-role">Pet comic · Single Page</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" id="faq" style="background:var(--cream-dark);border-top:4px solid var(--ink)">
+  <div class="container">
+    <div class="faq-layout">
+      <div class="hide-mobile">
+        <div class="section-label dark">✦ FAQ</div>
+        <h2 class="section-heading">Questions?<br><span class="text-red">We got you.</span></h2>
+        <p class="subheading mt-sm">Can't find what you need? <a href="create.html" style="color:var(--red);font-weight:700">Just message us.</a></p>
+        <div class="mt-lg">
+          <div class="section-label" style="display:block;text-align:center;padding:1.25rem 1rem">
+            <div style="font-family:var(--font-display);font-size:2rem;margin-bottom:0.25rem">48HR</div>
+            <div style="font-size:0.65rem;letter-spacing:0.1em">Typical Turnaround</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="section-label dark hide-desktop mb-md">✦ FAQ</div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">How similar does the character look to the real person? <span class="faq-icon">+</span></div>
+          <div class="faq-answer">Very similar. We use AI generation guided by your actual photo — our team crafts and refines the prompts to match your hairstyle, face shape, skin tone, and personality. The more reference photos you provide, the more accurate the result.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">How long does it actually take? <span class="faq-icon">+</span></div>
+          <div class="faq-answer">Standard turnaround is 48 hours for most orders. Larger custom projects get a specific timeline after your brief. Rush options are available — just mention it when you order.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">What format do I get the comic in? <span class="faq-icon">+</span></div>
+          <div class="faq-answer">High-resolution PDF and PNG files, optimized for both digital sharing and professional printing. Print-ready files are included in all orders of 3 pages or more.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">Can I request changes? <span class="faq-icon">+</span></div>
+          <div class="faq-answer">Absolutely. All orders include unlimited revisions until you're completely happy. We won't close out an order until the comic feels exactly right.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">What makes a good story idea to submit? <span class="faq-icon">+</span></div>
+          <div class="faq-answer">Anything with a scenario: "my dog escapes every time I open the gate," "we tried to cook a romantic dinner and almost burned the kitchen." Real moments make the best comics. The funnier and more specific, the better.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">Can I order as a surprise gift without telling the person? <span class="faq-icon">+</span></div>
+          <div class="faq-answer">Yes — one of our favourite use cases. Just flag it as a surprise and we'll keep all correspondence to your email only. The reaction when they open it is always worth it.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="cta-band">
+  <div class="container text-center" style="position:relative;z-index:1">
+    <div class="section-label dark" style="margin:0 auto 1rem">✦ Ready? Let's Go.</div>
+    <h2 class="display-heading text-cream" style="max-width:14ch;margin:0 auto">Your comic is waiting to be made.</h2>
+    <p class="subheading mt-sm" style="color:rgba(255,255,255,0.6);margin:0 auto">Tell us your story. We'll turn it into something you'll love forever.</p>
+    <div class="d-flex flex-wrap gap-md mt-lg" style="justify-content:center">
+      <a href="create.html" class="btn btn-secondary btn-lg">Create Your Comic ✦</a>
+      <a href="browse.html" class="btn btn-white btn-lg">See What's Possible →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div>
+        <div class="logo-wordmark mb-sm"><span class="logo-comic">COMIC</span><span class="logo-heart">♥</span><span class="logo-crush">CRUSH</span></div>
+        <p class="footer-tagline">Custom comics from real photos and real stories. The most personal gift you'll ever give — or receive.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Create</div>
+        <ul class="footer-links"><li><a href="create.html">Start Your Comic</a></li><li><a href="#pricing">Pricing</a></li><li><a href="browse.html">Browse Gallery</a></li></ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Studio</div>
+        <ul class="footer-links"><li><a href="about.html">About Us</a></li><li><a href="about.html">Our Process</a></li><li><a href="#faq">FAQ</a></li></ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Legal</div>
+        <ul class="footer-links"><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms of Service</a></li><li><a href="#">Refund Policy</a></li></ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Comic Crush Studio. All rights reserved.</span>
+      <span>Made with ♥ and way too much ink.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+function toggleMobile(){const m=document.getElementById('mobileMenu');m.style.display=m.style.display==='block'?'none':'block';}
+function toggleFaq(el){
+  const ans=el.nextElementSibling;
+  const open=el.classList.contains('open');
+  document.querySelectorAll('.faq-question.open').forEach(q=>{q.classList.remove('open');q.nextElementSibling.classList.remove('open');});
+  if(!open){el.classList.add('open');ans.classList.add('open');}
+}
+</script>
+</body>
+</html>

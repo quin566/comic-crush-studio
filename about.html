@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us — Comic Crush Studio</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.about-hero-grid { display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:center; }
+.about-panels { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+.about-panel { border:3px solid var(--ink); overflow:hidden; }
+.about-panel img { width:100%; height:100%; object-fit:cover; display:block; }
+.about-panel-1 { aspect-ratio:3/4; transform:rotate(-2deg); box-shadow:6px 6px 0 var(--ink); }
+.about-panel-2 { aspect-ratio:3/4; transform:rotate(2.5deg); box-shadow:6px 6px 0 var(--ink); margin-top:2rem; }
+.values-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:0; border:3px solid var(--ink); box-shadow:var(--shadow-heavy); }
+.value-cell { padding:2rem 1.5rem; border-right:3px solid var(--ink); background:white; }
+.value-cell:last-child { border-right:none; }
+.value-num { font-family:var(--font-display); font-size:3.5rem; color:var(--red); line-height:1; margin-bottom:0.5rem; }
+.value-title { font-family:var(--font-display); font-size:1.5rem; margin-bottom:0.4rem; }
+.value-desc { font-size:0.88rem; color:#666; line-height:1.65; }
+.process-steps { display:grid; grid-template-columns:repeat(4,1fr); gap:0; border:3px solid var(--ink); box-shadow:var(--shadow-heavy); }
+.process-step { padding:2rem 1.4rem; border-right:3px solid var(--ink); background:white; position:relative; }
+.process-step:last-child { border-right:none; }
+.process-step:nth-child(2) { background:var(--yellow); }
+.process-num { font-family:var(--font-display); font-size:3rem; color:var(--red); line-height:1; margin-bottom:0.6rem; }
+.process-title { font-family:var(--font-display); font-size:1.3rem; margin-bottom:0.4rem; }
+.process-desc { font-size:0.85rem; color:#555; line-height:1.6; }
+.for-who-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1.25rem; }
+.for-card { border:3px solid var(--ink); padding:1.5rem; background:white; box-shadow:var(--shadow-card); text-align:center; transition:transform 0.2s, box-shadow 0.2s; }
+.for-card:hover { transform:translate(-2px,-2px); box-shadow:7px 7px 0 var(--ink); }
+.for-icon { font-size:2.5rem; margin-bottom:0.75rem; }
+.for-title { font-family:var(--font-display); font-size:1.3rem; margin-bottom:0.4rem; }
+.for-desc { font-size:0.82rem; color:#666; line-height:1.6; }
+.team-panel { border:3px solid var(--ink); padding:2rem; background:white; box-shadow:var(--shadow-card); display:flex; gap:1.5rem; align-items:flex-start; }
+.team-avatar { width:72px; height:72px; border:3px solid var(--ink); flex-shrink:0; display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-size:2rem; }
+.team-name { font-family:var(--font-display); font-size:1.4rem; margin-bottom:0.15rem; }
+.team-role { font-size:0.72rem; text-transform:uppercase; letter-spacing:0.1em; font-weight:700; color:var(--red); margin-bottom:0.6rem; }
+.team-bio { font-size:0.88rem; color:#555; line-height:1.65; }
+.quote-band { background:var(--ink); border-top:4px solid var(--yellow); border-bottom:4px solid var(--yellow); padding:4rem 2rem; text-align:center; position:relative; overflow:hidden; }
+.quote-band::before { content:''; position:absolute; inset:0; background-image:radial-gradient(circle,rgba(255,255,255,0.05) 1px,transparent 1px); background-size:18px 18px; pointer-events:none; }
+@media(max-width:900px){ .about-hero-grid{grid-template-columns:1fr} .process-steps{grid-template-columns:1fr 1fr} .for-who-grid{grid-template-columns:1fr 1fr} .values-grid{grid-template-columns:1fr} .value-cell{border-right:none;border-bottom:3px solid var(--ink)} .value-cell:last-child{border-bottom:none} }
+@media(max-width:600px){ .process-steps{grid-template-columns:1fr} .process-step{border-right:none;border-bottom:3px solid var(--ink)} .process-step:last-child{border-bottom:none} .for-who-grid{grid-template-columns:1fr 1fr} .team-panel{flex-direction:column} }
+@media(max-width:440px){ .for-who-grid{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html"><div class="logo-wordmark"><span class="logo-comic">COMIC</span><span class="logo-heart">♥</span><span class="logo-crush">CRUSH</span><span class="logo-studio">STUDIO</span></div></a>
+    <ul class="nav-links">
+      <li><a href="browse.html">Browse Comics</a></li>
+      <li><a href="about.html" style="color:var(--yellow)">About</a></li>
+      <li><a href="index.html#pricing">Pricing</a></li>
+      <li><a href="create.html" class="nav-cta">Create Yours ✦</a></li>
+    </ul>
+    <button class="nav-menu-btn" onclick="document.getElementById('mm').style.display=document.getElementById('mm').style.display==='block'?'none':'block'" aria-label="Menu">
+      <svg width="22" height="16" viewBox="0 0 22 16"><rect y="0" width="22" height="2.5" fill="#faf6ed"/><rect y="6.5" width="22" height="2.5" fill="#faf6ed"/><rect y="13" width="22" height="2.5" fill="#faf6ed"/></svg>
+    </button>
+  </div>
+  <div class="nav-mobile-menu" id="mm" style="display:none">
+    <a href="browse.html">Browse Comics</a><a href="about.html">About</a>
+    <a href="index.html#pricing">Pricing</a><a href="create.html" style="color:var(--yellow)!important">✦ Create Yours</a>
+  </div>
+</nav>
+
+<!-- ABOUT HERO -->
+<section class="section" style="background:var(--cream);border-bottom:4px solid var(--ink)">
+  <div class="container">
+    <div class="about-hero-grid">
+      <div>
+        <div class="section-label red mb-sm">✦ Our Story</div>
+        <h1 class="display-heading">We turn real<br>life into<br><span class="text-red">comics.</span></h1>
+        <p class="subheading mt-sm">Comic Crush Studio started with one idea: the best stories aren't in movies or manga — they're in your camera roll, your group chats, and your ridiculous memories.</p>
+        <p class="subheading mt-sm">I'm Quinten — I use AI to bring your story to life as a comic, then personally review, craft, and refine every panel until it looks exactly right. The tech handles the rendering. I handle the magic.</p>
+        <div class="d-flex flex-wrap gap-sm mt-lg">
+          <a href="create.html" class="btn btn-primary btn-lg">Start Your Comic ✦</a>
+          <a href="browse.html" class="btn btn-secondary btn-lg">See Our Work</a>
+        </div>
+      </div>
+      <div style="position:relative">
+        <div class="about-panels">
+          <div class="about-panel about-panel-1">
+            <img src="AI%20Comics/A%20%26%20Q%20Beach%20Page%201.png" alt="Example comic" style="object-position:top left">
+          </div>
+          <div class="about-panel about-panel-2">
+            <img src="AI%20Comics/A%20%26%20Q%20Beach%20Page%203.png" alt="Example comic panel" style="object-position:bottom right">
+          </div>
+        </div>
+        <div class="speech-bubble" style="position:absolute;bottom:10%;left:-10%;transform:rotate(-3deg);z-index:10">Real people.<br>Real stories. 💥</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE BAND -->
+<div class="quote-band">
+  <div class="container" style="position:relative;z-index:1">
+    <div style="font-family:var(--font-display);font-size:5rem;color:var(--yellow);line-height:0.7;margin-bottom:1rem">"</div>
+    <p style="font-family:var(--font-display);font-size:clamp(1.6rem,3vw,2.5rem);color:var(--cream);max-width:20ch;margin:0 auto;line-height:1.25;letter-spacing:0.02em">Comics are the most human way to tell a story. I just happen to make them about you.</p>
+    <div style="margin-top:1.5rem;font-size:0.8rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--yellow);font-weight:700">— The Comic Crush Studio Team</div>
+  </div>
+</div>
+
+<!-- WHAT MAKES US DIFFERENT -->
+<section class="section" style="background:var(--cream-dark);border-bottom:4px solid var(--ink)">
+  <div class="container">
+    <div class="text-center mb-lg">
+      <div class="section-label">✦ What Makes Us Different</div>
+      <h2 class="section-heading">We actually care<br>how it turns out.</h2>
+    </div>
+    <div class="values-grid">
+      <div class="value-cell">
+        <div class="value-num">01</div>
+        <div class="value-title">AI-powered. Quinten-perfected.</div>
+        <p class="value-desc">I use AI to generate your comic visuals — then personally review every panel, refine the prompts, and edit the output until the characters look right, the expressions land, and the story feels exactly like yours.</p>
+      </div>
+      <div class="value-cell" style="background:var(--yellow)">
+        <div class="value-num">02</div>
+        <div class="value-title">Your story, exactly.</div>
+        <p class="value-desc">I don't put you in a template. I read your scenario, look at your photos, and build something original around you. The character looks like your person. The story sounds like you told it.</p>
+      </div>
+      <div class="value-cell">
+        <div class="value-num">03</div>
+        <div class="value-title">Until you love it.</div>
+        <p class="value-desc">Revisions are unlimited. I don't consider an order finished until you're genuinely happy with it. A lot of services won't say that. I mean it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THE PROCESS -->
+<section class="section" style="border-bottom:4px solid var(--ink)">
+  <div class="container">
+    <div class="text-center mb-lg">
+      <div class="section-label blue">✦ How It Actually Works</div>
+      <h2 class="section-heading">Behind the scenes.</h2>
+    </div>
+    <div class="process-steps">
+      <div class="process-step">
+        <div class="process-num">01</div>
+        <div class="process-title">You Submit</div>
+        <p class="process-desc">You fill out the order form with your photos, story idea, tone, and preferences. Takes about 3 minutes. I read every word.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-num">02</div>
+        <div class="process-title">We Brief</div>
+        <p class="process-desc">I review your order and build a detailed creative brief: character descriptions, story beats, visual moments, panel layout, and the exact prompts I'll need to bring it all to life.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-num">03</div>
+        <div class="process-title">We Generate &amp; Refine</div>
+        <p class="process-desc">We run your brief through our AI pipeline, then review every single panel — adjusting prompts, editing outputs, and refining until the characters, expressions, and story beats all hit exactly right.</p>
+      </div>
+      <div class="process-step" style="background:var(--ink)">
+        <div class="process-num" style="color:var(--yellow)">04</div>
+        <div class="process-title" style="color:var(--cream)">You Receive</div>
+        <p class="process-desc" style="color:#aaa">Your proof arrives by email within 48 hours. I revise as needed, then send the final high-res files. Done.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO IS THIS FOR -->
+<section class="section" style="background:var(--cream-dark);border-bottom:4px solid var(--ink)">
+  <div class="container">
+    <div class="text-center mb-lg">
+      <div class="section-label dark">✦ Who It's For</div>
+      <h2 class="section-heading">Anyone with a story<br>worth telling.</h2>
+    </div>
+    <div class="for-who-grid">
+      <div class="for-card">
+        <div class="for-icon">💑</div>
+        <div class="for-title">Couples</div>
+        <p class="for-desc">Anniversaries, first dates, love stories — the chaos of being in a relationship makes incredible comics.</p>
+      </div>
+      <div class="for-card" style="background:var(--yellow)">
+        <div class="for-icon">🐾</div>
+        <div class="for-title">Pet People</div>
+        <p class="for-desc">Your cat has more personality than most humans. Your dog deserves a starring role. Let's make it happen.</p>
+      </div>
+      <div class="for-card">
+        <div class="for-icon">👨‍👩‍👧</div>
+        <div class="for-title">Families</div>
+        <p class="for-desc">Road trips, Christmas chaos, the baby's first year — family memories deserve more than a photo album.</p>
+      </div>
+      <div class="for-card">
+        <div class="for-icon">🎂</div>
+        <div class="for-title">Gift Givers</div>
+        <p class="for-desc">Looking for something genuinely unforgettable? A custom comic is the gift that gets screamed about. In the best way.</p>
+      </div>
+      <div class="for-card">
+        <div class="for-icon">👯</div>
+        <div class="for-title">Best Friends</div>
+        <p class="for-desc">The inside jokes, the trips, the legendary nights out — best friend energy makes the funniest comics we make.</p>
+      </div>
+      <div class="for-card">
+        <div class="for-icon">🎉</div>
+        <div class="for-title">Milestone People</div>
+        <p class="for-desc">Graduations, promotions, retirements, new homes — big moments deserve something as big as how they felt.</p>
+      </div>
+      <div class="for-card" style="background:var(--ink)">
+        <div class="for-icon" style="filter:grayscale(1) brightness(2)">🌀</div>
+        <div class="for-title" style="color:var(--cream)">The Chaotic Ones</div>
+        <p class="for-desc" style="color:#aaa">No occasion needed. Sometimes life is just funny and you need it documented in comic form immediately.</p>
+      </div>
+      <div class="for-card" style="background:var(--red)">
+        <div class="for-icon">✨</div>
+        <div class="for-title" style="color:white">You</div>
+        <p class="for-desc" style="color:rgba(255,255,255,0.8)">If you have a story and a photo, you have everything we need. The rest is up to us.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="section" style="border-bottom:4px solid var(--ink)">
+  <div class="container">
+    <div class="mb-lg">
+      <div class="section-label mb-sm">✦ The Person Behind It</div>
+      <h2 class="section-heading">One person.<br>Fully obsessed.</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;align-items:start">
+      <div class="team-panel">
+        <div class="team-avatar" style="background:var(--yellow);font-size:1.5rem">✦</div>
+        <div>
+          <div class="team-name">Quinten S.</div>
+          <div class="team-role">Founder &amp; Everything Else</div>
+          <p class="team-bio">Hi — I'm Quinten, and I run Comic Crush Studio solo. I started this because I genuinely believe the best stories are already living in your camera roll, your texts, and your memories. I use AI generation tools to bring those stories to life as comics, then personally review, refine, and craft every single panel until it feels exactly right.</p>
+          <p class="team-bio" style="margin-top:0.75rem">Every order comes directly to me. I read your story, build the prompts, review the output, and make sure the final comic is something you'll actually love — not just something that was technically generated.</p>
+        </div>
+      </div>
+      <div class="team-panel" style="background:var(--ink)">
+        <div class="team-avatar" style="background:var(--red)">💥</div>
+        <div>
+          <div class="team-name" style="color:var(--cream)">Got a story?</div>
+          <div class="team-role" style="color:var(--yellow)">Let's Make It a Comic</div>
+          <p class="team-bio" style="color:#aaa;margin-top:0.5rem">Every order gets my personal attention. Send me your photos and your scenario — I'll handle the rest and have a proof back to you within 48 hours.</p>
+          <a href="create.html" class="btn btn-secondary" style="margin-top:1.25rem;display:inline-flex">Start Your Comic ✦</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS STRIP -->
+<section style="background:var(--yellow);border-bottom:4px solid var(--ink);padding:3rem 2rem">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:3px solid var(--ink);box-shadow:var(--shadow-heavy);background:white">
+      <div style="padding:1.75rem;text-align:center;border-right:3px solid var(--ink)">
+        <div style="font-family:var(--font-display);font-size:3.5rem;color:var(--red);line-height:1">200+</div>
+        <div style="font-size:0.72rem;text-transform:uppercase;letter-spacing:0.1em;font-weight:700;color:#999;margin-top:0.25rem">Comics Delivered</div>
+      </div>
+      <div style="padding:1.75rem;text-align:center;border-right:3px solid var(--ink)">
+        <div style="font-family:var(--font-display);font-size:3.5rem;color:var(--red);line-height:1">⭐ 4.9</div>
+        <div style="font-size:0.72rem;text-transform:uppercase;letter-spacing:0.1em;font-weight:700;color:#999;margin-top:0.25rem">Average Rating</div>
+      </div>
+      <div style="padding:1.75rem;text-align:center;border-right:3px solid var(--ink)">
+        <div style="font-family:var(--font-display);font-size:3.5rem;color:var(--red);line-height:1">48hr</div>
+        <div style="font-size:0.72rem;text-transform:uppercase;letter-spacing:0.1em;font-weight:700;color:#999;margin-top:0.25rem">Standard Turnaround</div>
+      </div>
+      <div style="padding:1.75rem;text-align:center">
+        <div style="font-family:var(--font-display);font-size:3.5rem;color:var(--red);line-height:1">∞</div>
+        <div style="font-size:0.72rem;text-transform:uppercase;letter-spacing:0.1em;font-weight:700;color:#999;margin-top:0.25rem">Revisions. Always.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section style="background:var(--red);border-bottom:4px solid var(--ink);padding:5rem 2rem;position:relative;overflow:hidden">
+  <div style="position:absolute;inset:0;background-image:radial-gradient(circle,rgba(0,0,0,0.1) 1.5px,transparent 1.5px);background-size:20px 20px;pointer-events:none"></div>
+  <div class="container text-center" style="position:relative;z-index:1">
+    <div class="section-label dark" style="margin:0 auto 1rem">✦ Let's Make Something Together</div>
+    <h2 class="display-heading text-cream" style="max-width:16ch;margin:0 auto">Your story deserves to be a comic.</h2>
+    <p class="subheading mt-sm" style="color:rgba(255,255,255,0.65);margin:0 auto">Send us your photo and a one-line story idea. We'll take it from there.</p>
+    <div class="d-flex flex-wrap gap-md mt-lg" style="justify-content:center">
+      <a href="create.html" class="btn btn-secondary btn-lg">Create Your Comic ✦</a>
+      <a href="browse.html" class="btn btn-white btn-lg">Browse the Gallery →</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div><div class="logo-wordmark mb-sm"><span class="logo-comic">COMIC</span><span class="logo-heart">♥</span><span class="logo-crush">CRUSH</span></div><p class="footer-tagline">Custom comics from real photos and real stories. The most personal gift you'll ever give.</p></div>
+      <div><div class="footer-col-title">Create</div><ul class="footer-links"><li><a href="create.html">Start Your Comic</a></li><li><a href="index.html#pricing">Pricing</a></li><li><a href="browse.html">Browse Gallery</a></li></ul></div>
+      <div><div class="footer-col-title">Studio</div><ul class="footer-links"><li><a href="about.html">About Us</a></li><li><a href="about.html">Our Process</a></li><li><a href="index.html#faq">FAQ</a></li></ul></div>
+      <div><div class="footer-col-title">Legal</div><ul class="footer-links"><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms of Service</a></li><li><a href="#">Refund Policy</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 Comic Crush Studio. All rights reserved.</span><span>Made with ♥ and way too much ink.</span></div>
+  </div>
+</footer>
+
+</body>
+</html>

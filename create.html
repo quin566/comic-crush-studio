@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Create Your Comic — Comic Crush Studio</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.create-layout { display:grid; grid-template-columns:1fr 380px; gap:3rem; align-items:start; }
+.form-card { background:white; border:3px solid var(--ink); box-shadow:var(--shadow-heavy); padding:2.5rem; }
+.form-section-title { font-family:var(--font-display); font-size:1.6rem; margin-bottom:0.25rem; border-bottom:3px solid var(--ink); padding-bottom:0.75rem; margin-bottom:1.5rem; }
+.form-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+.form-cols-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; }
+.sidebar-panel { background:white; border:3px solid var(--ink); box-shadow:var(--shadow-card); padding:1.5rem; margin-bottom:1.5rem; position:sticky; top:84px; }
+.sidebar-panel-title { font-family:var(--font-display); font-size:1.3rem; margin-bottom:1rem; border-bottom:2px solid var(--ink); padding-bottom:0.5rem; }
+.example-thumb { border:3px solid var(--ink); overflow:hidden; margin-bottom:0.75rem; aspect-ratio:4/3; }
+.example-thumb img { width:100%; height:100%; object-fit:cover; }
+.example-label { font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; color:#888; margin-bottom:1.25rem; }
+.trust-item { display:flex; align-items:flex-start; gap:0.6rem; margin-bottom:0.75rem; font-size:0.85rem; }
+.trust-icon { font-size:1.1rem; flex-shrink:0; margin-top:0.1rem; }
+.trust-text { line-height:1.5; color:#555; }
+.step-pills { display:flex; gap:0; margin-bottom:2.5rem; border:3px solid var(--ink); overflow:hidden; }
+.step-pill { flex:1; padding:0.6rem 0.5rem; text-align:center; font-size:0.7rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; background:var(--cream); border-right:3px solid var(--ink); color:#999; cursor:pointer; transition:all 0.2s; }
+.step-pill:last-child { border-right:none; }
+.step-pill.active { background:var(--red); color:white; }
+.step-pill.done { background:var(--yellow); color:var(--ink); }
+.form-step { display:none; }
+.form-step.active { display:block; }
+.submit-section { background:var(--ink); border:3px solid var(--ink); padding:2rem; margin-top:0.5rem; }
+.submit-note { font-size:0.8rem; color:#aaa; line-height:1.6; margin-top:1rem; }
+.package-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:0.75rem; }
+.package-card { border:3px solid var(--ink); padding:1rem; cursor:pointer; transition:all 0.15s; background:var(--cream); }
+.package-card:hover { background:var(--cream-dark); }
+.package-card.selected { background:var(--red); color:white; box-shadow:3px 3px 0 var(--ink); }
+.package-card.selected .pkg-price { color:var(--yellow); }
+.pkg-name { font-family:var(--font-display); font-size:1.1rem; margin-bottom:0.15rem; line-height:1; }
+.pkg-pages { font-size:0.68rem; text-transform:uppercase; letter-spacing:0.07em; color:#888; margin-bottom:0.35rem; font-weight:600; }
+.package-card.selected .pkg-pages { color:rgba(255,255,255,0.6); }
+.pkg-price { font-family:var(--font-display); font-size:1.6rem; color:var(--red); }
+.char-counter { font-size:0.72rem; color:#aaa; text-align:right; margin-top:0.25rem; }
+label.upload-zone { display:flex !important; flex-direction:column; align-items:center; justify-content:center; min-height:160px; width:100%; position:relative; overflow:hidden; border:3px dashed var(--ink); background:var(--cream); cursor:pointer; transition:background 0.2s; padding:0; box-sizing:border-box; }
+label.upload-zone:hover { background:var(--cream-dark); border-style:solid; }
+
+@media(max-width:960px){ .create-layout{grid-template-columns:1fr} .sidebar-panel{position:static} }
+@media(max-width:600px){ .form-row,.package-cards{grid-template-columns:1fr} .form-cols-3{grid-template-columns:1fr 1fr} }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html"><div class="logo-wordmark"><span class="logo-comic">COMIC</span><span class="logo-heart">♥</span><span class="logo-crush">CRUSH</span><span class="logo-studio">STUDIO</span></div></a>
+    <ul class="nav-links">
+      <li><a href="browse.html">Browse Comics</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="index.html#pricing">Pricing</a></li>
+      <li><a href="create.html" class="nav-cta">Create Yours ✦</a></li>
+    </ul>
+    <button class="nav-menu-btn" onclick="document.getElementById('mm').style.display=document.getElementById('mm').style.display==='block'?'none':'block'" aria-label="Menu">
+      <svg width="22" height="16" viewBox="0 0 22 16"><rect y="0" width="22" height="2.5" fill="#faf6ed"/><rect y="6.5" width="22" height="2.5" fill="#faf6ed"/><rect y="13" width="22" height="2.5" fill="#faf6ed"/></svg>
+    </button>
+  </div>
+  <div class="nav-mobile-menu" id="mm" style="display:none">
+    <a href="browse.html">Browse Comics</a><a href="about.html">About</a>
+    <a href="index.html#pricing">Pricing</a><a href="create.html" style="color:var(--yellow)!important">✦ Create Yours</a>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="container" style="position:relative;z-index:1">
+    <div class="section-label red">✦ Start Your Order</div>
+    <h1 class="section-heading text-cream" style="max-width:20ch">Let's make your comic.</h1>
+    <p class="subheading mt-xs" style="color:#aaa;max-width:50ch">Fill in the details below and we'll get started on your custom comic within the hour. It's easier than you think.</p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    <div class="create-layout">
+
+      <!-- MAIN FORM -->
+      <div>
+        <!-- Step pills -->
+        <div class="step-pills">
+          <div class="step-pill active" id="pill-1" onclick="goStep(1)">1 · About You</div>
+          <div class="step-pill" id="pill-2" onclick="goStep(2)">2 · The Story</div>
+          <div class="step-pill" id="pill-3" onclick="goStep(3)">3 · Your Package</div>
+          <div class="step-pill" id="pill-4" onclick="goStep(4)">4 · Submit</div>
+        </div>
+
+        <!-- STEP 1: About You -->
+        <div class="form-step active form-card" id="step-1">
+          <div class="form-section-title">Tell us who you are</div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Your Name *</label>
+              <input class="form-input" type="text" placeholder="First & last name">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email Address *</label>
+              <input class="form-input" type="email" placeholder="you@example.com">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Who is the comic about? *</label>
+            <p class="form-hint">e.g. "Me and my partner," "My best friend Maya," "My dog Biscuit"</p>
+            <input class="form-input" type="text" placeholder="The star(s) of your comic...">
+          </div>
+
+          <div class="form-section-title mt-md">Upload your photo(s)</div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Main Photo * <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#888;font-size:0.78rem">— required</span></label>
+              <p class="form-hint">Clear face shot. The more detail, the better the character.</p>
+              <label class="upload-zone" for="photo1" id="zone1">
+                <input type="file" id="photo1" accept="image/*" onchange="previewPhoto(this,'prev1','zone1')">
+                <div class="upload-zone-inner" id="zone1-content">
+                  <div style="font-size:2.2rem;line-height:1">📷</div>
+                  <div style="font-weight:700;font-size:0.88rem;margin-top:0.4rem">Click to upload</div>
+                  <div style="font-size:0.72rem;color:#aaa;margin-top:0.2rem">JPG, PNG, HEIC · up to 10MB</div>
+                </div>
+                <img id="prev1" class="upload-preview" alt="" style="display:none;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+              </label>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Second Photo <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#888;font-size:0.78rem">— optional</span></label>
+              <p class="form-hint">Partner, friend, pet, or another angle of the same person.</p>
+              <label class="upload-zone" for="photo2" id="zone2">
+                <input type="file" id="photo2" accept="image/*" onchange="previewPhoto(this,'prev2','zone2')">
+                <div class="upload-zone-inner" id="zone2-content">
+                  <div style="font-size:2.2rem;line-height:1">➕</div>
+                  <div style="font-weight:700;font-size:0.88rem;margin-top:0.4rem">Add a second photo</div>
+                  <div style="font-size:0.72rem;color:#aaa;margin-top:0.2rem">Optional but fun</div>
+                </div>
+                <img id="prev2" class="upload-preview" alt="" style="display:none;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+              </label>
+            </div>
+          </div>
+          <div class="d-flex" style="justify-content:flex-end;margin-top:1rem">
+            <button class="btn btn-primary btn-lg" onclick="goStep(2)">Next: The Story →</button>
+          </div>
+        </div>
+
+        <!-- STEP 2: The Story -->
+        <div class="form-step form-card" id="step-2">
+          <div class="form-section-title">Tell us your story</div>
+          <div class="form-group">
+            <label class="form-label">Story Idea *</label>
+            <p class="form-hint">Example: "Ariana and Quinten go on a chaotic beach date and end up taking the perfect sunset photo despite everything going wrong."</p>
+            <textarea class="form-textarea" style="min-height:140px" id="storyField" maxlength="600" oninput="updateCounter(this,'storyCnt')" placeholder="Describe your scenario, moment, or idea. The funnier and more specific, the better..."></textarea>
+            <div class="char-counter"><span id="storyCnt">0</span>/600 characters</div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Tone / Vibe *</label>
+            <p class="form-hint">Pick as many as feel right.</p>
+            <div class="chip-group" id="vibeChips">
+              <div class="chip" onclick="toggleChip(this)">😂 Funny</div>
+              <div class="chip" onclick="toggleChip(this)">💕 Romantic</div>
+              <div class="chip" onclick="toggleChip(this)">⚡ Action-Packed</div>
+              <div class="chip" onclick="toggleChip(this)">🌸 Wholesome</div>
+              <div class="chip" onclick="toggleChip(this)">🔥 Chaotic</div>
+              <div class="chip" onclick="toggleChip(this)">🥰 Cute</div>
+              <div class="chip" onclick="toggleChip(this)">🗺 Adventure</div>
+              <div class="chip" onclick="toggleChip(this)">😤 Dramatic</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Occasion</label>
+            <div class="chip-group">
+              <div class="chip" onclick="toggleChip(this)">🎁 Gift</div>
+              <div class="chip" onclick="toggleChip(this)">💍 Anniversary</div>
+              <div class="chip" onclick="toggleChip(this)">🎂 Birthday</div>
+              <div class="chip" onclick="toggleChip(this)">😄 Just for Fun</div>
+              <div class="chip" onclick="toggleChip(this)">👨‍👩‍👧 Family Memory</div>
+              <div class="chip" onclick="toggleChip(this)">💑 Couple Story</div>
+              <div class="chip" onclick="toggleChip(this)">🐾 Pet Comic</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Extra Notes <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#888;font-size:0.78rem">— optional</span></label>
+            <p class="form-hint">Anything else we should know — specific dialogue, inside jokes, a key visual moment.</p>
+            <textarea class="form-textarea" id="notesField" maxlength="400" oninput="updateCounter(this,'notesCnt')" placeholder="Any extra details, references, or requests..."></textarea>
+            <div class="char-counter"><span id="notesCnt">0</span>/400</div>
+          </div>
+
+          <div class="d-flex flex-wrap gap-sm" style="justify-content:space-between;margin-top:1rem;align-items:center">
+            <button class="btn btn-outline" onclick="goStep(1)">← Back</button>
+            <button class="btn btn-primary btn-lg" onclick="goStep(3)">Next: Choose Package →</button>
+          </div>
+        </div>
+
+        <!-- STEP 3: Package -->
+        <div class="form-step form-card" id="step-3">
+          <div class="form-section-title">Choose your package</div>
+          <div class="package-cards" id="packageCards">
+            <div class="package-card" onclick="selectPkg(this)">
+              <div class="pkg-name">Single Page</div>
+              <div class="pkg-pages">1 page · 4–6 panels</div>
+              <div class="pkg-price">$29</div>
+            </div>
+            <div class="package-card" onclick="selectPkg(this)">
+              <div class="pkg-name">Comic Strip</div>
+              <div class="pkg-pages">3 panels · strip</div>
+              <div class="pkg-price">$39</div>
+            </div>
+            <div class="package-card selected" onclick="selectPkg(this)">
+              <div class="pkg-name">3-Page Comic</div>
+              <div class="pkg-pages">3 pages · most popular</div>
+              <div class="pkg-price">$79</div>
+            </div>
+            <div class="package-card" onclick="selectPkg(this)">
+              <div class="pkg-name">6-Page Comic</div>
+              <div class="pkg-pages">6 pages + cover</div>
+              <div class="pkg-price">$149</div>
+            </div>
+            <div class="package-card" onclick="selectPkg(this)">
+              <div class="pkg-name">Full Custom</div>
+              <div class="pkg-pages">8+ pages · anything</div>
+              <div class="pkg-price">$249+</div>
+            </div>
+          </div>
+
+          <div class="form-row mt-md">
+            <div class="form-group">
+              <label class="form-label">Deadline / Needed By</label>
+              <input class="form-input" type="date" id="deadlineDate" min="">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Budget (if custom)</label>
+              <select class="form-select">
+                <option value="">Select a range</option>
+                <option>Under $50</option>
+                <option>$50–$100</option>
+                <option>$100–$200</option>
+                <option>$200–$400</option>
+                <option>$400+ (no limit, let's go)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="d-flex flex-wrap gap-sm" style="justify-content:space-between;margin-top:1rem;align-items:center">
+            <button class="btn btn-outline" onclick="goStep(2)">← Back</button>
+            <button class="btn btn-primary btn-lg" onclick="goStep(4)">Next: Submit →</button>
+          </div>
+        </div>
+
+        <!-- STEP 4: Submit -->
+        <div class="form-step" id="step-4">
+          <div class="form-card">
+            <div class="form-section-title">Almost there — review &amp; submit</div>
+            <div style="background:var(--cream);border:3px solid var(--ink);padding:1.25rem;margin-bottom:1.5rem">
+              <div style="font-size:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.75rem;color:#888">Order Summary</div>
+              <div id="orderSummary" style="font-size:0.9rem;line-height:1.8;color:#555">
+                <div>📦 Package: <strong>3-Page Comic — $79</strong></div>
+                <div>📷 Photos: <strong>To be uploaded</strong></div>
+                <div>⚡ Turnaround: <strong>48 hours standard</strong></div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label style="display:flex;align-items:flex-start;gap:0.75rem;cursor:pointer">
+                <input type="checkbox" style="margin-top:3px;width:18px;height:18px;flex-shrink:0;cursor:pointer" id="photoConsent">
+                <span style="font-size:0.88rem;line-height:1.5;color:#555">I confirm that I own or have permission to use the photos I'm submitting, and I agree to the <a href="#" style="color:var(--red);font-weight:700">Terms of Service</a>.</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="submit-section">
+            <h3 style="font-family:var(--font-display);font-size:1.8rem;color:var(--cream);margin-bottom:0.5rem">Your comic is one click away.</h3>
+            <p style="color:#aaa;font-size:0.88rem;margin-bottom:1.5rem">After you submit, we'll confirm your order by email within 2 hours and get started immediately.</p>
+            <button class="btn btn-secondary btn-lg" style="width:100%;justify-content:center;font-size:1.1rem" onclick="submitForm()">Submit My Comic Order ✦</button>
+            <p class="submit-note">✦ No payment required upfront — we'll send a secure payment link with your proof.<br>✦ Revisions are unlimited. We don't close your order until you love it.<br>✦ Questions? Reply to the confirmation email anytime.</p>
+          </div>
+
+          <div style="margin-top:1rem">
+            <button class="btn btn-outline" onclick="goStep(3)">← Back to Package</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- SIDEBAR -->
+      <div>
+        <div class="sidebar-panel">
+          <div class="sidebar-panel-title">See the result</div>
+          <div class="example-thumb">
+            <img src="AI%20Comics/A%20%26%20Q%20Beach%20Page%201.png" alt="Example comic">
+          </div>
+          <div class="example-label">Example: Ariana &amp; Quinten — 5-page custom comic</div>
+          <div class="d-flex flex-wrap gap-sm">
+            <a href="detail.html" style="font-size:0.8rem;color:var(--red);font-weight:700;text-decoration:underline">View this comic →</a>
+            <a href="browse.html" style="font-size:0.8rem;color:#888;font-weight:600">Browse all examples</a>
+          </div>
+        </div>
+
+        <div class="sidebar-panel">
+          <div class="sidebar-panel-title">Why us?</div>
+          <div class="trust-item"><span class="trust-icon">🎨</span><span class="trust-text"><strong>AI-powered, human-perfected.</strong> We use AI to generate your comic, then our team reviews, refines, and edits every panel until it's right.</span></div>
+          <div class="trust-item"><span class="trust-icon">♻️</span><span class="trust-text"><strong>Unlimited revisions.</strong> We don't call it done until you love it.</span></div>
+          <div class="trust-item"><span class="trust-icon">⚡</span><span class="trust-text"><strong>48hr turnaround.</strong> Standard on all orders. Rush available.</span></div>
+          <div class="trust-item"><span class="trust-icon">🔒</span><span class="trust-text"><strong>Your photos are safe.</strong> Never shared, never used commercially.</span></div>
+          <div class="trust-item"><span class="trust-icon">💌</span><span class="trust-text"><strong>No payment upfront.</strong> Pay securely after you see your proof.</span></div>
+        </div>
+
+        <div class="sidebar-panel" style="background:var(--yellow);border-color:var(--ink)">
+          <div style="font-family:var(--font-display);font-size:1.4rem;margin-bottom:0.5rem">⭐ 4.9 / 5.0</div>
+          <p style="font-size:0.85rem;line-height:1.55;color:#555;font-style:italic">"The artist nailed my boyfriend's face perfectly. He literally screamed when he opened it. Best birthday gift ever."</p>
+          <div style="font-size:0.75rem;font-weight:700;margin-top:0.75rem;text-transform:uppercase;letter-spacing:0.06em">— Priya K., 3-Page Comic</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SUCCESS MODAL -->
+<div id="successModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:999;align-items:center;justify-content:center">
+  <div style="background:white;border:4px solid var(--ink);box-shadow:10px 10px 0 var(--ink);max-width:520px;width:90%;padding:2.5rem;text-align:center;position:relative">
+    <div style="font-size:3.5rem;margin-bottom:0.75rem">🎉</div>
+    <h2 style="font-family:var(--font-display);font-size:2.5rem;margin-bottom:0.5rem">Order Received!</h2>
+    <p style="color:#555;font-size:0.95rem;line-height:1.7;margin-bottom:1.5rem">We've got your story. Our artists are on it — expect a confirmation email within 2 hours and your first proof within 48 hours.</p>
+    <a href="browse.html" class="btn btn-primary btn-lg" style="margin-right:0.75rem">Browse More Comics</a>
+    <a href="index.html" class="btn btn-outline btn-lg">Back to Home</a>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div><div class="logo-wordmark mb-sm"><span class="logo-comic">COMIC</span><span class="logo-heart">♥</span><span class="logo-crush">CRUSH</span></div><p class="footer-tagline">Custom comics from real photos and real stories.</p></div>
+      <div><div class="footer-col-title">Create</div><ul class="footer-links"><li><a href="create.html">Start Your Comic</a></li><li><a href="index.html#pricing">Pricing</a></li></ul></div>
+      <div><div class="footer-col-title">Studio</div><ul class="footer-links"><li><a href="about.html">About Us</a></li><li><a href="browse.html">Gallery</a></li></ul></div>
+      <div><div class="footer-col-title">Legal</div><ul class="footer-links"><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 Comic Crush Studio.</span><span>Made with ♥ and way too much ink.</span></div>
+  </div>
+</footer>
+
+<script>
+let currentStep = 1;
+function goStep(n) {
+  document.getElementById('step-'+currentStep).classList.remove('active');
+  document.getElementById('pill-'+currentStep).classList.remove('active');
+  if(n > currentStep) document.getElementById('pill-'+currentStep).classList.add('done');
+  else document.getElementById('pill-'+currentStep).classList.remove('done');
+  currentStep = n;
+  document.getElementById('step-'+n).classList.add('active');
+  document.getElementById('pill-'+n).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function toggleChip(el){ el.classList.toggle('selected'); }
+function selectPkg(el){ document.querySelectorAll('.package-card').forEach(c=>c.classList.remove('selected')); el.classList.add('selected'); }
+function updateCounter(el, id){ document.getElementById(id).textContent = el.value.length; }
+function previewPhoto(input, previewId, zoneId) {
+  if(input.files && input.files[0]){
+    const reader = new FileReader();
+    reader.onload = e => {
+      const img = document.getElementById(previewId);
+      img.src = e.target.result;
+      img.alt = '';
+      img.style.display = 'block';
+      if(zoneId) {
+        const inner = document.getElementById(zoneId+'-content');
+        if(inner) inner.style.visibility = 'hidden';
+        const zone = document.getElementById(zoneId);
+        zone.style.borderStyle = 'solid';
+        zone.style.borderColor = 'var(--red)';
+      }
+    };
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+function submitForm() {
+  if(!document.getElementById('photoConsent').checked){ alert('Please confirm you have permission to use the photos.'); return; }
+  const modal = document.getElementById('successModal');
+  modal.style.display='flex';
+  modal.onclick = e => { if(e.target===modal) modal.style.display='none'; };
+}
+// Set min date for deadline
+const dateInput = document.getElementById('deadlineDate');
+if(dateInput){ const d = new Date(); d.setDate(d.getDate()+2); dateInput.min = d.toISOString().split('T')[0]; }
+</script>
+</body>
+</html>
