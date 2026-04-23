@@ -357,17 +357,14 @@ function previewPhoto(input, previewId, zoneId) {
   if(input.files && input.files[0]){
     const reader = new FileReader();
     reader.onload = e => {
-      const img = document.getElementById(previewId);
-      img.src = e.target.result;
-      img.alt = '';
-      img.style.display = 'block';
-      if(zoneId) {
-        const inner = document.getElementById(zoneId+'-content');
-        if(inner) inner.style.display = 'none';
-        const zone = document.getElementById(zoneId);
-        zone.style.borderStyle = 'solid';
-        zone.style.borderColor = 'var(--red)';
-      }
+      const zone = document.getElementById(zoneId);
+      const inner = document.getElementById(zoneId+'-content');
+      if(inner) inner.style.display = 'none';
+      zone.style.backgroundImage = 'url("' + e.target.result + '")';
+      zone.style.backgroundSize = 'cover';
+      zone.style.backgroundPosition = 'center';
+      zone.style.borderStyle = 'solid';
+      zone.style.borderColor = 'var(--red)';
     };
     reader.readAsDataURL(input.files[0]);
   }
