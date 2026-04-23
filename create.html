@@ -272,7 +272,7 @@ label.upload-zone:hover { background:var(--cream-dark); border-style:solid; }
             <h3 style="font-family:var(--font-display);font-size:1.8rem;color:var(--cream);margin-bottom:0.5rem">Your comic is one click away.</h3>
             <p style="color:#aaa;font-size:0.88rem;margin-bottom:1.5rem">After you submit, we'll confirm your order by email within 2 hours and get started immediately.</p>
             <button class="btn btn-secondary btn-lg" id="submitBtn" style="width:100%;justify-content:center;font-size:1.1rem" onclick="submitForm()">Submit My Comic Order ✦</button>
-            <p class="submit-note">✦ No payment required upfront — we'll send a secure payment link with your proof.<br>✦ Revisions are unlimited. We don't close your order until you love it.<br>✦ Questions? Reply to the confirmation email anytime.</p>
+            <p class="submit-note">✦ No payment required upfront — we'll send a secure payment link with your proof.<br>✦ <strong style="color:var(--yellow)">Reply to the confirmation email with your photos</strong> — we'll request them if you forget.<br>✦ Revisions are unlimited. We don't close your order until you love it.</p>
           </div>
 
           <div style="margin-top:1rem">
@@ -402,9 +402,10 @@ async function submitForm() {
     : 'None selected');
 
   const photo1 = document.getElementById('photo1');
-  if (photo1.files[0]) data.append('photo1', photo1.files[0]);
   const photo2 = document.getElementById('photo2');
-  if (photo2.files[0]) data.append('photo2', photo2.files[0]);
+  data.append('photos_note', photo1.files[0]
+    ? (photo2.files[0] ? '2 photos uploaded — customer will reply with attachments' : '1 photo uploaded — customer will reply with attachment')
+    : 'No photos uploaded yet');
 
   try {
     const res = await fetch('https://formspree.io/f/xnjllgag', {
