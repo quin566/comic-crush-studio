@@ -95,17 +95,17 @@ label.upload-zone:hover { background:var(--cream-dark); border-style:solid; }
           <div class="form-row">
             <div class="form-group">
               <label class="form-label">Your Name *</label>
-              <input class="form-input" type="text" placeholder="First & last name">
+              <input class="form-input" type="text" id="customerName" placeholder="First & last name">
             </div>
             <div class="form-group">
               <label class="form-label">Email Address *</label>
-              <input class="form-input" type="email" placeholder="you@example.com">
+              <input class="form-input" type="email" id="customerEmail" placeholder="you@example.com">
             </div>
           </div>
           <div class="form-group">
             <label class="form-label">Who is the comic about? *</label>
             <p class="form-hint">e.g. "Me and my partner," "My best friend Maya," "My dog Biscuit"</p>
-            <input class="form-input" type="text" placeholder="The star(s) of your comic...">
+            <input class="form-input" type="text" id="characters" placeholder="The star(s) of your comic...">
           </div>
 
           <div class="form-section-title mt-md">Upload your photo(s)</div>
@@ -169,7 +169,7 @@ label.upload-zone:hover { background:var(--cream-dark); border-style:solid; }
 
           <div class="form-group">
             <label class="form-label">Occasion</label>
-            <div class="chip-group">
+            <div class="chip-group" id="occasionChips">
               <div class="chip" onclick="toggleChip(this)">🎁 Gift</div>
               <div class="chip" onclick="toggleChip(this)">💍 Anniversary</div>
               <div class="chip" onclick="toggleChip(this)">🎂 Birthday</div>
@@ -231,7 +231,7 @@ label.upload-zone:hover { background:var(--cream-dark); border-style:solid; }
             </div>
             <div class="form-group">
               <label class="form-label">Budget (if custom)</label>
-              <select class="form-select">
+              <select class="form-select" id="budgetSelect">
                 <option value="">Select a range</option>
                 <option>Under $50</option>
                 <option>$50–$100</option>
@@ -271,7 +271,7 @@ label.upload-zone:hover { background:var(--cream-dark); border-style:solid; }
           <div class="submit-section">
             <h3 style="font-family:var(--font-display);font-size:1.8rem;color:var(--cream);margin-bottom:0.5rem">Your comic is one click away.</h3>
             <p style="color:#aaa;font-size:0.88rem;margin-bottom:1.5rem">After you submit, we'll confirm your order by email within 2 hours and get started immediately.</p>
-            <button class="btn btn-secondary btn-lg" style="width:100%;justify-content:center;font-size:1.1rem" onclick="submitForm()">Submit My Comic Order ✦</button>
+            <button class="btn btn-secondary btn-lg" id="submitBtn" style="width:100%;justify-content:center;font-size:1.1rem" onclick="submitForm()">Submit My Comic Order ✦</button>
             <p class="submit-note">✦ No payment required upfront — we'll send a secure payment link with your proof.<br>✦ Revisions are unlimited. We don't close your order until you love it.<br>✦ Questions? Reply to the confirmation email anytime.</p>
           </div>
 
@@ -372,11 +372,66 @@ function previewPhoto(input, previewId, zoneId) {
     reader.readAsDataURL(input.files[0]);
   }
 }
-function submitForm() {
-  if(!document.getElementById('photoConsent').checked){ alert('Please confirm you have permission to use the photos.'); return; }
-  const modal = document.getElementById('successModal');
-  modal.style.display='flex';
-  modal.onclick = e => { if(e.target===modal) modal.style.display='none'; };
+async function submitForm() {
+  if (!document.getElementById('photoConsent').checked) {
+    alert('Please confirm you have permission to use the photos.');
+    return;
+  }
+
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
+
+  const data = new FormData();
+  data.append('name',       document.getElementById('customerName').value);
+  data.append('email',      document.getElementById('customerEmail').value);
+  data.append('characters', document.getElementById('characters').value);
+  data.append('story',      document.getElementById('storyField').value);
+  data.append('notes',      document.getElementById('notesField').value);
+  data.append('deadline',   document.getElementById('deadlineDate').value);
+  data.append('budget',     document.getElementById('budgetSelect').value);
+
+  const vibes = [...document.querySelectorAll('#vibeChips .chip.selected')]
+    .map(c => c.textContent.trim()).join(', ');
+  data.append('vibes', vibes || 'None selected');
+
+  const occasion = [...document.querySelectorAll('#occasionChips .chip.selected')]
+    .map(c => c.textContent.trim()).join(', ');
+  data.append('occasion', occasion || 'None selected');
+
+  const pkg = document.querySelector('.package-card.selected');
+  data.append('package', pkg
+    ? pkg.querySelector('.pkg-name').textContent + ' — ' + pkg.querySelector('.pkg-price').textContent
+    : 'None selected');
+
+  const photo1 = document.getElementById('photo1');
+  if (photo1.files[0]) data.append('photo1', photo1.files[0]);
+  const photo2 = document.getElementById('photo2');
+  if (photo2.files[0]) data.append('photo2', photo2.files[0]);
+
+  try {
+    const res = await fetch('https://formspree.io/f/xnjllgag', {
+      method: 'POST',
+      body: data,
+      headers: { Accept: 'application/json' }
+    });
+
+    if (res.ok) {
+      const modal = document.getElementById('successModal');
+      modal.style.display = 'flex';
+      modal.onclick = e => { if (e.target === modal) modal.style.display = 'none'; };
+    } else {
+      const json = await res.json().catch(() => ({}));
+      const msg = json.errors ? json.errors.map(e => e.message).join(', ') : 'Submission failed. Please try again.';
+      alert(msg);
+      btn.disabled = false;
+      btn.textContent = 'Submit My Comic Order ✦';
+    }
+  } catch {
+    alert('Network error. Please try again.');
+    btn.disabled = false;
+    btn.textContent = 'Submit My Comic Order ✦';
+  }
 }
 // Set min date for deadline
 const dateInput = document.getElementById('deadlineDate');
