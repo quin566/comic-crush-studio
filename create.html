@@ -108,33 +108,11 @@ label.upload-zone:hover { background:var(--cream-dark); border-style:solid; }
             <input class="form-input" type="text" id="characters" placeholder="The star(s) of your comic...">
           </div>
 
-          <div class="form-section-title mt-md">Upload your photo(s)</div>
-          <div class="form-row">
-            <div class="form-group">
-              <label class="form-label">Main Photo * <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#888;font-size:0.78rem">— required</span></label>
-              <p class="form-hint">Clear face shot. The more detail, the better the character.</p>
-              <label class="upload-zone" for="photo1" id="zone1">
-                <input type="file" id="photo1" accept="image/*" onchange="previewPhoto(this,'prev1','zone1')">
-                <div class="upload-zone-inner" id="zone1-content">
-                  <div style="font-size:2.2rem;line-height:1">📷</div>
-                  <div style="font-weight:700;font-size:0.88rem;margin-top:0.4rem">Click to upload</div>
-                  <div style="font-size:0.72rem;color:#aaa;margin-top:0.2rem">JPG, PNG, HEIC · up to 10MB</div>
-                </div>
-                <img id="prev1" class="upload-preview" alt="" style="display:none;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;">
-              </label>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Second Photo <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#888;font-size:0.78rem">— optional</span></label>
-              <p class="form-hint">Partner, friend, pet, or another angle of the same person.</p>
-              <label class="upload-zone" for="photo2" id="zone2">
-                <input type="file" id="photo2" accept="image/*" onchange="previewPhoto(this,'prev2','zone2')">
-                <div class="upload-zone-inner" id="zone2-content">
-                  <div style="font-size:2.2rem;line-height:1">➕</div>
-                  <div style="font-weight:700;font-size:0.88rem;margin-top:0.4rem">Add a second photo</div>
-                  <div style="font-size:0.72rem;color:#aaa;margin-top:0.2rem">Optional but fun</div>
-                </div>
-                <img id="prev2" class="upload-preview" alt="" style="display:none;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;">
-              </label>
+          <div style="background:var(--cream);border:3px solid var(--ink);padding:1rem 1.25rem;margin-top:1.5rem;display:flex;align-items:flex-start;gap:0.75rem">
+            <span style="font-size:1.4rem;flex-shrink:0">📷</span>
+            <div>
+              <div style="font-weight:700;font-size:0.88rem;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.2rem">Send us your photos by email</div>
+              <div style="font-size:0.83rem;color:#555;line-height:1.5">After you submit, reply to the confirmation email with your photos. Clear face shots work best — the more detail, the better the character.</div>
             </div>
           </div>
           <div class="d-flex" style="justify-content:flex-end;margin-top:1rem">
@@ -353,22 +331,6 @@ function goStep(n) {
 function toggleChip(el){ el.classList.toggle('selected'); }
 function selectPkg(el){ document.querySelectorAll('.package-card').forEach(c=>c.classList.remove('selected')); el.classList.add('selected'); }
 function updateCounter(el, id){ document.getElementById(id).textContent = el.value.length; }
-function previewPhoto(input, previewId, zoneId) {
-  if(input.files && input.files[0]){
-    const reader = new FileReader();
-    reader.onload = e => {
-      const zone = document.getElementById(zoneId);
-      const inner = document.getElementById(zoneId+'-content');
-      if(inner) inner.style.display = 'none';
-      zone.style.backgroundImage = 'url("' + e.target.result + '")';
-      zone.style.backgroundSize = 'cover';
-      zone.style.backgroundPosition = 'center';
-      zone.style.borderStyle = 'solid';
-      zone.style.borderColor = 'var(--red)';
-    };
-    reader.readAsDataURL(input.files[0]);
-  }
-}
 async function submitForm() {
   if (!document.getElementById('photoConsent').checked) {
     alert('Please confirm you have permission to use the photos.');
@@ -401,11 +363,7 @@ async function submitForm() {
     ? pkg.querySelector('.pkg-name').textContent + ' — ' + pkg.querySelector('.pkg-price').textContent
     : 'None selected');
 
-  const photo1 = document.getElementById('photo1');
-  const photo2 = document.getElementById('photo2');
-  data.append('photos_note', photo1.files[0]
-    ? (photo2.files[0] ? '2 photos uploaded — customer will reply with attachments' : '1 photo uploaded — customer will reply with attachment')
-    : 'No photos uploaded yet');
+  data.append('photos_note', 'Customer will send photos via email reply');
 
   try {
     const res = await fetch('https://formspree.io/f/xnjllgag', {
