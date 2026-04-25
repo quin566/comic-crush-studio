@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Process -- Comic Crush Studio</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.tl-step { display:grid; grid-template-columns:110px 1fr; border-bottom:3px solid var(--ink); background:white; }
+.tl-step:last-child { border-bottom:none; }
+.tl-step.alt { background:var(--yellow); }
+.tl-step.dark { background:var(--ink); }
+.tl-num-col { padding:2rem 1.25rem; border-right:3px solid var(--ink); display:flex; align-items:flex-start; justify-content:center; }
+.tl-num { font-family:var(--font-display); font-size:3.8rem; color:var(--red); line-height:1; }
+.tl-step.dark .tl-num { color:var(--yellow); }
+.tl-body { padding:2rem; }
+.tl-title { font-family:var(--font-display); font-size:1.75rem; margin-bottom:0.45rem; }
+.tl-step.dark .tl-title { color:var(--cream); }
+.tl-desc { font-size:0.92rem; color:#555; line-height:1.72; }
+.tl-step.dark .tl-desc { color:#aaa; }
+.tl-badge { display:inline-block; margin-top:0.85rem; background:var(--red); color:white; font-size:0.65rem; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; padding:0.2rem 0.6rem; border:2px solid var(--ink); }
+.tl-step.alt .tl-badge { background:var(--ink); color:var(--cream); }
+.tl-step.dark .tl-badge { background:var(--yellow); color:var(--ink); }
+.know-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:0; border:3px solid var(--ink); box-shadow:var(--shadow-heavy); }
+.know-cell { padding:2rem; border-right:3px solid var(--ink); background:white; }
+.know-cell:last-child { border-right:none; }
+.know-cell.mid { background:var(--yellow); }
+.know-icon { font-size:2rem; margin-bottom:0.75rem; }
+.know-title { font-family:var(--font-display); font-size:1.4rem; margin-bottom:0.4rem; }
+.know-desc { font-size:0.88rem; color:#666; line-height:1.65; }
+.know-cell.mid .know-desc { color:#333; }
+@media(max-width:700px){ .tl-step{grid-template-columns:1fr} .tl-num-col{border-right:none;border-bottom:3px solid var(--ink);padding:1.25rem 1.5rem;justify-content:flex-start} .know-grid{grid-template-columns:1fr} .know-cell{border-right:none;border-bottom:3px solid var(--ink)} .know-cell:last-child{border-bottom:none} }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html"><div class="logo-wordmark"><span class="logo-comic">COMIC</span><span class="logo-heart">♥</span><span class="logo-crush">CRUSH</span><span class="logo-studio">STUDIO</span></div></a>
+    <ul class="nav-links">
+      <li><a href="browse.html">Browse Comics</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="index.html#pricing">Pricing</a></li>
+      <li><a href="create.html" class="nav-cta">Create Yours ✦</a></li>
+    </ul>
+    <button class="nav-menu-btn" onclick="document.getElementById('mm').style.display=document.getElementById('mm').style.display==='block'?'none':'block'" aria-label="Menu">
+      <svg width="22" height="16" viewBox="0 0 22 16"><rect y="0" width="22" height="2.5" fill="#faf6ed"/><rect y="6.5" width="22" height="2.5" fill="#faf6ed"/><rect y="13" width="22" height="2.5" fill="#faf6ed"/></svg>
+    </button>
+  </div>
+  <div class="nav-mobile-menu" id="mm" style="display:none">
+    <a href="browse.html">Browse Comics</a><a href="about.html">About</a>
+    <a href="index.html#pricing">Pricing</a><a href="create.html" style="color:var(--yellow)!important">✦ Create Yours</a>
+  </div>
+</nav>
+
+<div style="background:var(--yellow);border-bottom:3px solid var(--ink);padding:0.55rem 2rem">
+  <div class="container"><a href="index.html" style="font-weight:800;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--ink)">← Back to Home</a></div>
+</div>
+
+<div class="page-hero">
+  <div class="container" style="position:relative;z-index:1">
+    <div class="section-label dark mb-sm">✦ How It Works</div>
+    <h1 class="display-heading text-cream" style="max-width:16ch">How your comic gets made.</h1>
+    <p class="subheading mt-sm subheading-light" style="max-width:52ch">No guessing, no confusion. Here is exactly what happens from the moment you hit submit to the moment your files land in your inbox.</p>
+  </div>
+</div>
+
+<section class="section" style="background:var(--cream-dark);border-bottom:4px solid var(--ink)">
+  <div class="container">
+    <div class="text-center mb-lg">
+      <div class="section-label">✦ The Full Process</div>
+      <h2 class="section-heading">Five steps. 48 hours.</h2>
+    </div>
+    <div style="border:3px solid var(--ink);box-shadow:var(--shadow-heavy)">
+      <div class="tl-step">
+        <div class="tl-num-col"><div class="tl-num">01</div></div>
+        <div class="tl-body">
+          <div class="tl-title">Fill Out the Form</div>
+          <p class="tl-desc">Takes about 3 minutes. You tell me who is in the comic, what the story is, and what tone you are going for. Funny? Sweet? Dramatic? Completely unhinged? The more specific you are, the better the final comic. You do not need the whole thing mapped out. Just give me the gist and I will handle the creative direction from there.</p>
+          <span class="tl-badge">About 3 minutes</span>
+        </div>
+      </div>
+      <div class="tl-step alt">
+        <div class="tl-num-col"><div class="tl-num">02</div></div>
+        <div class="tl-body">
+          <div class="tl-title">Confirmation and Photos</div>
+          <p class="tl-desc">Right after you submit, a confirmation email hits your inbox. Reply to that email with your photos. Clear face shots work best. The more detail in the photo, the closer the character likeness. You do not need professional shots. A sharp phone photo in decent lighting is completely fine. You can send multiple references and I will pull the best elements from each.</p>
+          <span class="tl-badge">Arrives in minutes</span>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-num-col"><div class="tl-num">03</div></div>
+        <div class="tl-body">
+          <div class="tl-title">Your Comic Gets Built</div>
+          <p class="tl-desc">I read your order, write a detailed creative brief, and take it through the AI pipeline panel by panel. Every panel gets reviewed and refined before it reaches you. If a character's face is off, I fix it. If an expression does not land, I adjust the prompt and generate again. The technology handles the rendering. I handle making it look right.</p>
+          <span class="tl-badge">Done behind the scenes</span>
+        </div>
+      </div>
+      <div class="tl-step dark">
+        <div class="tl-num-col"><div class="tl-num">04</div></div>
+        <div class="tl-body">
+          <div class="tl-title">Your Proof Arrives</div>
+          <p class="tl-desc">Within 48 hours, your first look arrives by email. Go through every panel carefully. If anything needs adjusting, just reply and tell me what to change. Revisions are unlimited. I do not close your order until you are genuinely happy with what you see.</p>
+          <span class="tl-badge">Within 48 hours</span>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-num-col"><div class="tl-num">05</div></div>
+        <div class="tl-body">
+          <div class="tl-title">Approve, Pay, and Receive</div>
+          <p class="tl-desc">Once you love it, I send a secure payment link. After payment is confirmed, the full high-res files come straight to your inbox. PNG and PDF, ready to print, frame, post, or gift. That is it. Done.</p>
+          <span class="tl-badge">Files delivered immediately after payment</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="border-bottom:4px solid var(--ink)">
+  <div class="container">
+    <div class="text-center mb-lg">
+      <div class="section-label blue">✦ Good to Know</div>
+      <h2 class="section-heading">A few things worth mentioning.</h2>
+    </div>
+    <div class="know-grid">
+      <div class="know-cell">
+        <div class="know-icon">📸</div>
+        <div class="know-title">Photos Matter</div>
+        <p class="know-desc">The better the photo, the closer the character likeness. Front-facing, clear lighting, and a shot where the face is fully visible give the best results. Sunglasses and heavy filters make the job harder. When in doubt, send a few options and I will pick the best one.</p>
+      </div>
+      <div class="know-cell mid">
+        <div class="know-icon">✏️</div>
+        <div class="know-title">Revisions Are Free</div>
+        <p class="know-desc">Every order includes unlimited revisions. If you want a different expression, a panel redrawn, or the story adjusted, just say so. I work on your order until it is something you actually love, not just something that was technically delivered.</p>
+      </div>
+      <div class="know-cell">
+        <div class="know-icon">💳</div>
+        <div class="know-title">Pay After Approval</div>
+        <p class="know-desc">You do not pay anything upfront. Payment is collected only after you have reviewed your proof and are happy with it. You get to see exactly what you are buying before any money changes hands.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--red);border-bottom:4px solid var(--ink);padding:5rem 2rem;position:relative;overflow:hidden">
+  <div style="position:absolute;inset:0;background-image:radial-gradient(circle,rgba(0,0,0,0.1) 1.5px,transparent 1.5px);background-size:20px 20px;pointer-events:none"></div>
+  <div class="container text-center" style="position:relative;z-index:1">
+    <div class="section-label dark" style="margin:0 auto 1rem">✦ Ready? Let's Go.</div>
+    <h2 class="display-heading text-cream" style="max-width:16ch;margin:0 auto">Your comic is waiting to be made.</h2>
+    <p class="subheading mt-sm" style="color:rgba(255,255,255,0.65);margin:0 auto">Fill out the form and have a proof in your inbox within 48 hours.</p>
+    <div class="d-flex flex-wrap gap-md mt-lg" style="justify-content:center">
+      <a href="create.html" class="btn btn-secondary btn-lg">Create Your Comic ✦</a>
+      <a href="faq.html" class="btn btn-white btn-lg">Read the FAQ →</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div><div class="logo-wordmark mb-sm"><span class="logo-comic">COMIC</span><span class="logo-heart">♥</span><span class="logo-crush">CRUSH</span></div><p class="footer-tagline">Custom comics from real photos and real stories. The most personal gift you'll ever give. Or receive.</p></div>
+      <div><div class="footer-col-title">Create</div><ul class="footer-links"><li><a href="create.html">Start Your Comic</a></li><li><a href="index.html#pricing">Pricing</a></li><li><a href="browse.html">Browse Gallery</a></li></ul></div>
+      <div><div class="footer-col-title">Studio</div><ul class="footer-links"><li><a href="about.html">About Us</a></li><li><a href="process.html">Our Process</a></li><li><a href="faq.html">FAQ</a></li></ul></div>
+      <div><div class="footer-col-title">Legal</div><ul class="footer-links"><li><a href="privacy.html">Privacy Policy</a></li><li><a href="terms.html">Terms of Service</a></li><li><a href="refund.html">Refund Policy</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 Comic Crush Studio. All rights reserved.</span><span>Made with ♥ and way too much ink.</span></div>
+  </div>
+</footer>
+
+</body>
+</html>

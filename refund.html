@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Refund Policy -- Comic Crush Studio</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.legal-body { max-width:72ch; }
+.legal-section { margin-bottom:3rem; }
+.legal-h2 { font-family:var(--font-display); font-size:1.8rem; margin-bottom:0.75rem; letter-spacing:0.02em; }
+.legal-p { font-size:0.95rem; line-height:1.75; color:#444; margin-bottom:1rem; }
+.legal-list { list-style:none; margin:0.75rem 0 1rem; display:flex; flex-direction:column; gap:0.5rem; }
+.legal-list li { font-size:0.95rem; line-height:1.65; color:#444; padding-left:1.25rem; position:relative; }
+.legal-list li::before { content:'✦'; position:absolute; left:0; color:var(--red); font-size:0.7rem; top:0.15rem; }
+.legal-divider { height:3px; background:var(--ink); margin:2.5rem 0; }
+.legal-updated { font-size:0.8rem; text-transform:uppercase; letter-spacing:0.08em; color:#999; font-weight:700; margin-bottom:2rem; }
+.scenario-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:0; border:3px solid var(--ink); box-shadow:var(--shadow-heavy); margin:1.5rem 0; }
+.scenario-card { padding:1.75rem; border-right:3px solid var(--ink); }
+.scenario-card:last-child { border-right:none; }
+.scenario-card.green { background:var(--yellow); }
+.scenario-card.grey { background:var(--cream-dark); }
+.scenario-card.dark { background:var(--ink); }
+.scenario-status { font-family:var(--font-display); font-size:1.1rem; margin-bottom:0.4rem; }
+.scenario-card.dark .scenario-status { color:var(--yellow); }
+.scenario-detail { font-size:0.85rem; line-height:1.65; color:#555; }
+.scenario-card.dark .scenario-detail { color:#aaa; }
+@media(max-width:640px){ .scenario-grid{grid-template-columns:1fr} .scenario-card{border-right:none;border-bottom:3px solid var(--ink)} .scenario-card:last-child{border-bottom:none} }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html"><div class="logo-wordmark"><span class="logo-comic">COMIC</span><span class="logo-heart">♥</span><span class="logo-crush">CRUSH</span><span class="logo-studio">STUDIO</span></div></a>
+    <ul class="nav-links">
+      <li><a href="browse.html">Browse Comics</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="index.html#pricing">Pricing</a></li>
+      <li><a href="create.html" class="nav-cta">Create Yours ✦</a></li>
+    </ul>
+    <button class="nav-menu-btn" onclick="document.getElementById('mm').style.display=document.getElementById('mm').style.display==='block'?'none':'block'" aria-label="Menu">
+      <svg width="22" height="16" viewBox="0 0 22 16"><rect y="0" width="22" height="2.5" fill="#faf6ed"/><rect y="6.5" width="22" height="2.5" fill="#faf6ed"/><rect y="13" width="22" height="2.5" fill="#faf6ed"/></svg>
+    </button>
+  </div>
+  <div class="nav-mobile-menu" id="mm" style="display:none">
+    <a href="browse.html">Browse Comics</a><a href="about.html">About</a>
+    <a href="index.html#pricing">Pricing</a><a href="create.html" style="color:var(--yellow)!important">✦ Create Yours</a>
+  </div>
+</nav>
+
+<div style="background:var(--yellow);border-bottom:3px solid var(--ink);padding:0.55rem 2rem">
+  <div class="container"><a href="index.html" style="font-weight:800;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--ink)">← Back to Home</a></div>
+</div>
+
+<div class="page-hero">
+  <div class="container" style="position:relative;z-index:1">
+    <div class="section-label dark mb-sm">✦ Legal</div>
+    <h1 class="display-heading text-cream" style="max-width:16ch">Refund Policy.</h1>
+    <p class="subheading mt-sm subheading-light" style="max-width:52ch">The short version: you do not pay until after you approve your proof, so you are protected from the start. Here is how it works in full.</p>
+  </div>
+</div>
+
+<section class="section" style="border-bottom:4px solid var(--ink)">
+  <div class="container">
+    <div class="legal-body">
+      <div class="legal-updated">Last updated: April 2026</div>
+
+      <div class="legal-section">
+        <h2 class="legal-h2">How the Process Protects You</h2>
+        <p class="legal-p">Comic Crush Studio is built around a simple premise: you approve the comic before you pay for it. Your proof arrives by email within 48 hours, you request any changes you want at no extra cost, and payment is only collected once you are genuinely happy with the result. This means the risk sits with me, not with you.</p>
+      </div>
+
+      <div class="legal-divider"></div>
+
+      <div class="legal-section">
+        <h2 class="legal-h2">At a Glance</h2>
+        <div class="scenario-grid">
+          <div class="scenario-card green">
+            <div class="scenario-status">Before work starts</div>
+            <p class="scenario-detail">Contact me right away and I will cancel the order. No charge, no hassle.</p>
+          </div>
+          <div class="scenario-card grey">
+            <div class="scenario-status">During revisions</div>
+            <p class="scenario-detail">Revisions are unlimited. No payment is due yet. We keep working until you are happy.</p>
+          </div>
+          <div class="scenario-card dark">
+            <div class="scenario-status">After files delivered</div>
+            <p class="scenario-detail">No refunds once final files are delivered and payment is confirmed.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="legal-divider"></div>
+
+      <div class="legal-section">
+        <h2 class="legal-h2">Before Work Starts</h2>
+        <p class="legal-p">If you need to cancel before I have started on your comic, contact me as soon as possible by replying to your confirmation email. If no work has been done yet, the order will be cancelled with no charge.</p>
+      </div>
+
+      <div class="legal-divider"></div>
+
+      <div class="legal-section">
+        <h2 class="legal-h2">During the Revision Stage</h2>
+        <p class="legal-p">If you receive your proof and are not happy with it, do not pay. Just reply and tell me what to change. Revisions are completely free and there is no limit to how many you can request. I will keep revising until the comic is right.</p>
+        <p class="legal-p">If after multiple rounds of revisions you feel the comic is not working and you want to cancel, contact me directly. Because no payment has been collected at this stage, there is nothing to refund. I will close the order at your request.</p>
+      </div>
+
+      <div class="legal-divider"></div>
+
+      <div class="legal-section">
+        <h2 class="legal-h2">After Files Are Delivered</h2>
+        <p class="legal-p">Once you have approved your proof, paid, and received your final high-resolution files, refunds are not available. The work is complete and the files are in your hands.</p>
+        <p class="legal-p">If there is a technical issue with the files themselves, such as a corrupted download or a missing page, contact me immediately and I will resend them.</p>
+      </div>
+
+      <div class="legal-divider"></div>
+
+      <div class="legal-section">
+        <h2 class="legal-h2">Questions or Concerns</h2>
+        <p class="legal-p">If something feels off at any point, reach out before taking any other action. Most issues are straightforward to resolve. Reply to your order email or use the form below.</p>
+        <div class="mt-sm">
+          <!-- Replace the href value below with your Notion form URL -->
+          <a href="YOUR_NOTION_FORM_URL" target="_blank" rel="noopener" class="btn btn-primary">Contact Me ✦</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div><div class="logo-wordmark mb-sm"><span class="logo-comic">COMIC</span><span class="logo-heart">♥</span><span class="logo-crush">CRUSH</span></div><p class="footer-tagline">Custom comics from real photos and real stories. The most personal gift you'll ever give. Or receive.</p></div>
+      <div><div class="footer-col-title">Create</div><ul class="footer-links"><li><a href="create.html">Start Your Comic</a></li><li><a href="index.html#pricing">Pricing</a></li><li><a href="browse.html">Browse Gallery</a></li></ul></div>
+      <div><div class="footer-col-title">Studio</div><ul class="footer-links"><li><a href="about.html">About Us</a></li><li><a href="process.html">Our Process</a></li><li><a href="faq.html">FAQ</a></li></ul></div>
+      <div><div class="footer-col-title">Legal</div><ul class="footer-links"><li><a href="privacy.html">Privacy Policy</a></li><li><a href="terms.html">Terms of Service</a></li><li><a href="refund.html">Refund Policy</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 Comic Crush Studio. All rights reserved.</span><span>Made with ♥ and way too much ink.</span></div>
+  </div>
+</footer>
+
+</body>
+</html>

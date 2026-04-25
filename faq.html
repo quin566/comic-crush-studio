@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAQ -- Comic Crush Studio</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.faq-category { margin-bottom: 0.25rem; }
+.faq-category-title { font-family:var(--font-display); font-size:1.6rem; padding:1rem 1.4rem; background:var(--ink); color:var(--yellow); border:3px solid var(--ink); border-bottom:none; letter-spacing:0.03em; }
+.faq-category:last-child .faq-item:last-child { margin-bottom:0; }
+.faq-group { border-top:none; }
+@media(max-width:768px){ .faq-layout-grid{grid-template-columns:1fr!important} }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html"><div class="logo-wordmark"><span class="logo-comic">COMIC</span><span class="logo-heart">♥</span><span class="logo-crush">CRUSH</span><span class="logo-studio">STUDIO</span></div></a>
+    <ul class="nav-links">
+      <li><a href="browse.html">Browse Comics</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="index.html#pricing">Pricing</a></li>
+      <li><a href="create.html" class="nav-cta">Create Yours ✦</a></li>
+    </ul>
+    <button class="nav-menu-btn" onclick="document.getElementById('mm').style.display=document.getElementById('mm').style.display==='block'?'none':'block'" aria-label="Menu">
+      <svg width="22" height="16" viewBox="0 0 22 16"><rect y="0" width="22" height="2.5" fill="#faf6ed"/><rect y="6.5" width="22" height="2.5" fill="#faf6ed"/><rect y="13" width="22" height="2.5" fill="#faf6ed"/></svg>
+    </button>
+  </div>
+  <div class="nav-mobile-menu" id="mm" style="display:none">
+    <a href="browse.html">Browse Comics</a><a href="about.html">About</a>
+    <a href="index.html#pricing">Pricing</a><a href="create.html" style="color:var(--yellow)!important">✦ Create Yours</a>
+  </div>
+</nav>
+
+<div style="background:var(--yellow);border-bottom:3px solid var(--ink);padding:0.55rem 2rem">
+  <div class="container"><a href="index.html" style="font-weight:800;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--ink)">← Back to Home</a></div>
+</div>
+
+<div class="page-hero">
+  <div class="container" style="position:relative;z-index:1">
+    <div class="section-label dark mb-sm">✦ Questions</div>
+    <h1 class="display-heading text-cream" style="max-width:14ch">Frequently asked questions.</h1>
+    <p class="subheading mt-sm subheading-light" style="max-width:50ch">Everything you want to know before you order. If your question is not here, scroll to the bottom and ask directly.</p>
+  </div>
+</div>
+
+<section class="section" style="background:var(--cream-dark);border-bottom:4px solid var(--ink)">
+  <div class="container">
+
+    <!-- YOUR ORDER -->
+    <div class="faq-category">
+      <div class="faq-category-title">Your Order</div>
+      <div class="faq-group">
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">How do I place an order? <span class="faq-icon">+</span></div>
+          <div class="faq-answer">Fill out the order form on the Create page. It takes about 3 minutes. You tell me who is in the comic, what the story is, and what tone you want. Right after you submit, a confirmation email arrives. Reply to that email with your photos and we are off.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">How long does it take? <span class="faq-icon">+</span></div>
+          <div class="faq-answer">Standard turnaround is 48 hours or less for most orders. Larger custom projects may take a little longer and I will let you know upfront if that is the case. Rush options are available too. Just mention it in the form or your confirmation email reply.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">Can I order as a surprise gift without telling the person? <span class="faq-icon">+</span></div>
+          <div class="faq-answer">Yes, this is one of the best use cases. Flag it as a surprise in your order and I will keep all correspondence to your email only. The reaction when someone opens a comic of themselves is always worth it.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">What makes a good story idea? <span class="faq-icon">+</span></div>
+          <div class="faq-answer">Anything with a real scenario. "My dog escapes the yard every single time I open the gate." "We tried to cook a romantic dinner and almost burned the kitchen down." "My dad thought he was fixing the car and made everything worse." Real moments with a clear sequence of events make the best comics. The more specific and funny the detail, the better.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">Do I need to have the story fully planned out? <span class="faq-icon">+</span></div>
+          <div class="faq-answer">Not at all. A rough idea is enough to get started. Give me the characters, the general situation, and the feeling you want, and I will build the story arc from there. Most people are surprised by how much comes out of a single sentence of inspiration.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">Can I order more than one comic at once? <span class="faq-icon">+</span></div>
+          <div class="faq-answer">Yes. Just submit a separate form for each one or mention it in your order notes and I will sort out the details with you. Bulk gift orders are also welcome.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- THE COMIC -->
+    <div class="faq-category" style="margin-top:2.5rem">
+      <div class="faq-category-title">The Comic Itself</div>
+      <div class="faq-group">
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">How close will the characters look to us? <span class="faq-icon">+</span></div>
+          <div class="faq-answer">Very close. I use your actual photo as the reference and build the character from there, matching face shape, hairstyle, skin tone, and overall vibe. The more clear and detailed your reference photo, the more accurate the result. Sending multiple reference shots from different angles helps a lot.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">Can I request a specific art style? <span class="faq-icon">+</span></div>
+          <div class="faq-answer">Yes. The order form lets you pick from available styles, and you can describe specific preferences in the notes. If you have a reference image or a particular look in mind, mention it and I will do my best to match it.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">How many characters can be in the comic? <span class="faq-icon">+</span></div>
+          <div class="faq-answer">It depends on the package. The Single Page and Comic Strip tiers are built for 1 to 2 characters. The 3-Page Comic handles up to 3. The 6-Page handles up to 4. The Full Custom package can include as many as the story calls for. Pets count as characters and are always welcome.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">What if I want changes to my proof? <span class="faq-icon">+</span></div>
+          <div class="faq-answer">Just reply to the proof email and tell me what to adjust. Revisions are unlimited. I work on your order until every panel looks right and you are genuinely happy with it. I do not consider an order done until you say it is.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">Can you make comics with kids in them? <span class="faq-icon">+</span></div>
+          <div class="faq-answer">Yes. Family comics featuring kids are some of the most popular orders. Just include photos in your submission and note their ages and any personality details that would make the character more accurate.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PHOTOS AND FILES -->
+    <div class="faq-category" style="margin-top:2.5rem">
+      <div class="faq-category-title">Photos and Files</div>
+      <div class="faq-group">
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">What photos work best? <span class="faq-icon">+</span></div>
+          <div class="faq-answer">Clear, front-facing shots in decent lighting. The face should be fully visible with no heavy filters, sunglasses, or obstructions. You do not need professional photos. A sharp phone photo works perfectly. Sending two or three references from slightly different angles gives the best character accuracy.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">What file formats do I receive? <span class="faq-icon">+</span></div>
+          <div class="faq-answer">Your final comic is delivered as high-resolution PNG and PDF files. Both are print-ready. PNG works great for sharing digitally or uploading to a print service. PDF is ideal for home printing or sending to a professional printer.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">Can I print my comic? <span class="faq-icon">+</span></div>
+          <div class="faq-answer">Yes. All files are delivered at print resolution. You can print at home, upload to any online print service, or take them to a local print shop. Many customers frame their comics or have them printed as poster-size pieces.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">Do you offer physical print delivery? <span class="faq-icon">+</span></div>
+          <div class="faq-answer">Not currently. All orders are delivered as digital files. You own the files and can print them anywhere you like, at any size.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">Is my order private? <span class="faq-icon">+</span></div>
+          <div class="faq-answer">Yes. Your photos and story details are only used to create your comic. They are not shared publicly, sold, or used for any other purpose. See the Privacy Policy for full details.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAYMENT -->
+    <div class="faq-category" style="margin-top:2.5rem">
+      <div class="faq-category-title">Payment and Refunds</div>
+      <div class="faq-group">
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">How much does a comic cost? <span class="faq-icon">+</span></div>
+          <div class="faq-answer">Prices start at $15 for a single-page comic and go up based on size and complexity. The most popular option is the 3-Page Comic at $39. Full pricing is on the home page under the Pricing section.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">When do I pay? <span class="faq-icon">+</span></div>
+          <div class="faq-answer">After you have approved your proof. You do not pay anything upfront. Once you have reviewed the comic and are happy with it, I send a secure payment link. Payment is collected then and your final files follow immediately.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">Do you offer refunds? <span class="faq-icon">+</span></div>
+          <div class="faq-answer">Refunds are not available after your files have been delivered. If you have not yet received your proof, contact me before work begins and I will sort it out. During the revision process, I work until you are happy before payment is ever collected, so there is very little risk on your end. See the Refund Policy for full details.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ASK A QUESTION -->
+<section style="background:var(--ink);border-bottom:4px solid var(--yellow);padding:4.5rem 2rem;position:relative;overflow:hidden">
+  <div style="position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,0.04) 1px,transparent 1px);background-size:18px 18px;pointer-events:none"></div>
+  <div class="container text-center" style="position:relative;z-index:1">
+    <div class="section-label" style="margin:0 auto 1rem">✦ Still Have a Question?</div>
+    <h2 class="section-heading text-cream" style="max-width:20ch;margin:0 auto">Ask away.</h2>
+    <p class="subheading mt-sm" style="color:#888;margin:0 auto">Use the form below and I will get back to you by email.</p>
+    <div class="mt-lg">
+      <!-- Replace the href value below with your Notion form URL -->
+      <a href="YOUR_NOTION_FORM_URL" target="_blank" rel="noopener" class="btn btn-secondary btn-lg">Submit Your Question ✦</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div><div class="logo-wordmark mb-sm"><span class="logo-comic">COMIC</span><span class="logo-heart">♥</span><span class="logo-crush">CRUSH</span></div><p class="footer-tagline">Custom comics from real photos and real stories. The most personal gift you'll ever give. Or receive.</p></div>
+      <div><div class="footer-col-title">Create</div><ul class="footer-links"><li><a href="create.html">Start Your Comic</a></li><li><a href="index.html#pricing">Pricing</a></li><li><a href="browse.html">Browse Gallery</a></li></ul></div>
+      <div><div class="footer-col-title">Studio</div><ul class="footer-links"><li><a href="about.html">About Us</a></li><li><a href="process.html">Our Process</a></li><li><a href="faq.html">FAQ</a></li></ul></div>
+      <div><div class="footer-col-title">Legal</div><ul class="footer-links"><li><a href="privacy.html">Privacy Policy</a></li><li><a href="terms.html">Terms of Service</a></li><li><a href="refund.html">Refund Policy</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 Comic Crush Studio. All rights reserved.</span><span>Made with ♥ and way too much ink.</span></div>
+  </div>
+</footer>
+
+<script>
+function toggleFaq(el){
+  const ans=el.nextElementSibling;
+  const open=el.classList.contains('open');
+  document.querySelectorAll('.faq-question.open').forEach(q=>{q.classList.remove('open');q.nextElementSibling.classList.remove('open');});
+  if(!open){el.classList.add('open');ans.classList.add('open');}
+}
+</script>
+</body>
+</html>
